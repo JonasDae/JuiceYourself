@@ -29,3 +29,6 @@ Activities:
 8) Help
 9) splash
 
+## API
+www.thecocktaildb.com
+thenounproject.com
