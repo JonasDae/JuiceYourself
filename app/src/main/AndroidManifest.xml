@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.thomasmore.juiceyourself" >
+    package="com.thomasmore.juiceyourself">
 
     <application
         android:allowBackup="true"
@@ -8,8 +8,66 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".MainActivity" >
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".SplashScreen"
+            android:label="@string/title_activity_splash_screen"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Counter"
+            android:label="@string/title_activity_counter"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.thomasmore.juiceyourself.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Top"
+            android:label="@string/title_activity_top"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.thomasmore.juiceyourself.MainActivity" />
+        </activity>
+        <activity
+            android:name=".New"
+            android:label="@string/title_activity_new"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.thomasmore.juiceyourself.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Details"
+            android:label="@string/title_activity_details"
+            android:parentActivityName=".List"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.thomasmore.juiceyourself.List" />
+        </activity>
+        <activity
+            android:name=".List"
+            android:label="@string/title_activity_list"
+            android:parentActivityName=".Search"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.thomasmore.juiceyourself.Search" />
+        </activity>
+        <activity
+            android:name=".Search"
+            android:label="@string/title_activity_search"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.thomasmore.juiceyourself.MainActivity" />
+        </activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
