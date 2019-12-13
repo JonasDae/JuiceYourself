@@ -5,7 +5,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#EDE2D0">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,48 +19,79 @@
         app:layout_constraintVertical_bias="0.0">
 
         <TextView
-            android:id="@+id/opmerking"
-            android:layout_width="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="100dp"
+            android:id="@+id/welkom"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="30sp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
+            android:textStyle="bold|italic"
+            android:text="@string/welkom"
             />
 
         <TableLayout
-            android:layout_width="fill_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="2" >
-
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/welkom">
             <TableRow>
 
-                <Button
+                <ImageButton
+
                     android:id="@+id/button_search"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
+                    android:layout_height="200dp"
+                    android:layout_width="120dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/search"
+                    android:background="#BECAE6"
+                    android:scaleType="fitCenter"
+                    android:onClick="search_onClick"/>
 
-                    />
-                <Button
+                <ImageButton
                     android:id="@+id/button_add"
-                    android:layout_height="wrap_content"
-                    android:textSize="15sp"
-                    />
-            </TableRow>
-            <TableRow>
-                <Button
-                    android:id="@+id/button_top"
-                    android:textSize="15sp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    />
+                    android:layout_width="120dp"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/add"
+                    android:background="#AF948F"
+                    android:scaleType="fitCenter"
+                    android:onClick="add_onClick"/>
 
-                <Button
+            </TableRow>
+
+            <TableRow >
+
+                <ImageButton
+                    android:id="@+id/button_top"
+                    android:layout_width="120dp"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/top"
+                    android:background="#AF948F"
+                    android:scaleType="fitCenter"
+                    android:onClick="top_onClick"/>
+
+                <ImageButton
                     android:id="@+id/button_counter"
-                    android:textSize="15sp"
-                    android:layout_alignParentBottom="true"
-                    />
+                    android:layout_width="120dp"
+                    android:layout_height="200dp"
+                    android:layout_marginBottom="0dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/counter"
+                    android:background="#BECAE6"
+                    android:scaleType="fitCenter"
+                    android:onClick="counter_onClick"/>
             </TableRow>
 
         </TableLayout>
+
 
     </RelativeLayout>
 
