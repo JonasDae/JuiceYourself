@@ -8,4 +8,11 @@
     <string name="title_activity_counter">Counter</string>
     <string name="title_activity_help">Help</string>
     <string name="title_activity_splash">Splash</string>
+
+    <string name="welkom">Welkom bij Juice Yourself!</string>
+    <string name="button_add">Toevoegen</string>
+    <string name="button_top">Top</string>
+    <string name="button_search">Zoeken</string>
+    <string name="button_counter">Teller</string>
+
 </resources>
