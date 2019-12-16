@@ -1,4 +1,4 @@
-package be.thomasmore.juiceyourself;
+package be.thomasmore.juiceyourself.Models;
 
 public class Ingredient {
 // members

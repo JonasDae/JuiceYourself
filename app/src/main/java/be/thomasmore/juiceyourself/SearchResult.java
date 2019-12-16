@@ -10,7 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 
-public class List extends AppCompatActivity {
+public class SearchResult extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

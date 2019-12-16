@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="be.thomasmore.juiceyourself">
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -52,14 +52,14 @@
         <activity
             android:name=".Details"
             android:label="@string/title_activity_details"
-            android:parentActivityName=".List"
+            android:parentActivityName=".SearchResult"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="be.thomasmore.juiceyourself.List" />
+                android:value="be.thomasmore.juiceyourself.SearchResult" />
         </activity>
         <activity
-            android:name=".List"
+            android:name=".SearchResult"
             android:label="@string/title_activity_list"
             android:parentActivityName=".Search"
             android:theme="@style/AppTheme.NoActionBar">
