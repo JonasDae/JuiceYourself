@@ -47,11 +47,13 @@ public class MainActivity extends AppCompatActivity {
             Log.e("INFO",result);
             JsonHelper jsonHelper = new JsonHelper();
             List<Cocktail> cocktails = jsonHelper.getCocktails(result);
+            /*
             // TODO: debug info
                 for(int i=0;i<cocktails.size();i++) {
                     Log.e("INFO",cocktails.get(i).toString());
 
                 }
+            */
         }
     });
         reader.execute("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a");
