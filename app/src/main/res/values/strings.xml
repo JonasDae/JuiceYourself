@@ -9,10 +9,27 @@
     <string name="title_activity_help">Help</string>
     <string name="title_activity_splash">Splash</string>
 
+    //Menu
+    <string name="menu_home">Home</string>
+    <string name="menu_search">Zoeken</string>
+    <string name="menu_new">Toevoegen</string>
+    <string name="menu_highscore">Top drinks</string>
+    <string name="menu_counter">Teller</string>
+
+    //Home screen
     <string name="welkom">Welkom bij Juice Yourself!</string>
     <string name="button_add">Toevoegen</string>
     <string name="button_top">Top</string>
     <string name="button_search">Zoeken</string>
     <string name="button_counter">Teller</string>
+
+    //Search activity
+    <string name="search_naam">Naam: </string>
+    <string name="search_glas">Glas: </string>
+    <string name="search_categorie">Categorie: </string>
+    <string name="search_ingrediënt">Ingrediënt: </string>
+    <string name="search_message">Zoek een cocktail op  </string>
+
+
 
 </resources>

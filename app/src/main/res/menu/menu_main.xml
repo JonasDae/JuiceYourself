@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="be.thomasmore.mobileos.MainActivity">
+
+    <item android:id="@+id/menu_home"
+        android:title="@string/menu_home"
+        android:icon="@mipmap/ic_launcher"/>
+
+    <item android:id="@+id/menu_search"
+                android:title="@string/menu_search"
+                android:icon="@mipmap/ic_launcher"/>
+
+    <item android:id="@+id/menu_new"
+        android:title="@string/menu_new"
+        android:icon="@mipmap/ic_launcher"/>
+
+    <item android:id="@+id/menu_highscore"
+        android:title="@string/menu_highscore"
+        android:icon="@mipmap/ic_launcher"/>
+
+    <item android:id="@+id/menu_counter"
+        android:title="@string/menu_counter"
+        android:icon="@mipmap/ic_launcher"/>
+
+</menu>

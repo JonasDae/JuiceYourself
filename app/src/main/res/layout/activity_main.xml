@@ -61,7 +61,7 @@
                     android:src="@drawable/add"
                     android:background="#AF948F"
                     android:scaleType="fitCenter"
-                    android:onClick="add_onClick"/>
+                    android:onClick="new_onClick"/>
 
             </TableRow>
 
