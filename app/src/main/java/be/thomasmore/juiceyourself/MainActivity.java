@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void add_onClick(View view) {
+    public void new_onClick(View view) {
         Intent intent = new Intent(this, New.class);
         startActivity(intent);
     }
