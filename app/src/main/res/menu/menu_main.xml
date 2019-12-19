@@ -23,4 +23,8 @@
         android:title="@string/menu_counter"
         android:icon="@mipmap/ic_launcher"/>
 
+    <item android:id="@+id/menu_hulp"
+        android:title="@string/menu_hulp"
+        android:icon="@mipmap/ic_launcher"/>
+
 </menu>

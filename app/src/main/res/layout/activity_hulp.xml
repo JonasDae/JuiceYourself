@@ -52,7 +52,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:textSize="22dp"
-            android:textStyle="bold|italic"
             android:text="@string/hulp_text"
             android:layout_below="@+id/hulp_titel"/>
 
