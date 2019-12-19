@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void search_onClick(View view) {
         Intent intent = new Intent(this, Search.class);
+        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 

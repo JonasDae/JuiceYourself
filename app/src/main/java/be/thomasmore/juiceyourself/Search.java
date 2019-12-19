@@ -1,6 +1,7 @@
 package be.thomasmore.juiceyourself;
 
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -12,18 +13,30 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Spinner;
+
+import be.thomasmore.juiceyourself.Controllers.ModelController;
+import be.thomasmore.juiceyourself.adapters.SpinnerAdapter;
 
 public class Search extends AppCompatActivity {
 
+    ModelController controller;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        controller = (ModelController) getIntent().getSerializableExtra("ModelController");
+
         Spinner spinnerGlas = (Spinner) findViewById(R.id.spinnerGlas);
         Spinner spinnerCategorie = (Spinner) findViewById(R.id.spinnerCategorie);
-        Spinner spinnerIngredient = (Spinner) findViewById(R.id.spinnerIngrediënt);
+
+
+        SpinnerAdapter adapterGlas = new SpinnerAdapter(getApplicationContext(),controller.getGlazenValues());
+        spinnerGlas.setAdapter(adapterGlas);
+        SpinnerAdapter adapterCategorie = new SpinnerAdapter(getApplicationContext(),controller.getCategorieenValues());
+        spinnerCategorie.setAdapter(adapterCategorie);
 
 // options menu
         Toolbar toolbar = findViewById(R.id.toolbar);
