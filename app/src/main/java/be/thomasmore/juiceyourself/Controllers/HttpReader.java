@@ -1,4 +1,4 @@
-package be.thomasmore.juiceyourself;
+package be.thomasmore.juiceyourself.Controllers;
 
 import android.os.AsyncTask;
 import android.util.Log;

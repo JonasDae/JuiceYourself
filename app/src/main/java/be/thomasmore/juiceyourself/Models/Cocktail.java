@@ -2,9 +2,10 @@ package be.thomasmore.juiceyourself.Models;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cocktail {
+public class Cocktail implements Serializable {
 // members
     private long id;
     private String naam;

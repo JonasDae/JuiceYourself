@@ -1,6 +1,8 @@
 package be.thomasmore.juiceyourself.Models;
 
-public class Glas {
+import java.io.Serializable;
+
+public class Glas implements Serializable {
 // members
     private int Id;
     private String Naam;

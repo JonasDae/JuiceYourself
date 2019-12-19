@@ -1,6 +1,8 @@
 package be.thomasmore.juiceyourself.Models;
 
-public class Ingredient {
+import java.io.Serializable;
+
+public class Ingredient implements Serializable {
 // members
     private long Id;
     private String Naam;
