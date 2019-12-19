@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         controller = (ModelController) getIntent().getSerializableExtra("ModelController");
-        for(int i=0;i<controller.getCocktails().size();i++)
-            Log.e("INFO",controller.getCocktails().get(i).getNaam());
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -40,27 +38,27 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
     //Menu views
-    public void home_onClick() {
+    public void home_onClick(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
-    public void search_onClick() {
+    public void search_onClick(View view) {
         Intent intent = new Intent(this, Search.class);
         startActivity(intent);
     }
 
-    public void add_onClick() {
+    public void add_onClick(View view) {
         Intent intent = new Intent(this, New.class);
         startActivity(intent);
     }
 
-    public void top_onClick() {
+    public void top_onClick(View view) {
         Intent intent = new Intent(this, Highscore.class);
         startActivity(intent);
     }
 
-    public void counter_onClick() {
+    public void counter_onClick(View view) {
         Intent intent = new Intent(this, Counter.class);
         startActivity(intent);
     }
