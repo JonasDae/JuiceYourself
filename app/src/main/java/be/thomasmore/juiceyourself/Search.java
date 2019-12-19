@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Spinner;
 
 public class Search extends AppCompatActivity {
 
@@ -19,17 +20,27 @@ public class Search extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        Spinner spinnerGlas = (Spinner) findViewById(R.id.spinnerGlas);
+        Spinner spinnerCategorie = (Spinner) findViewById(R.id.spinnerCategorie);
+        Spinner spinnerIngredient = (Spinner) findViewById(R.id.spinnerIngrediënt);
+
+// options menu
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
+
+
+
+
+// options menu hieronder
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -50,9 +61,7 @@ public class Search extends AppCompatActivity {
             default:
                 return false;
         }
-
     }
-
     //Menu views
     public void home_onClick() {
         Intent intent = new Intent(this, MainActivity.class);
