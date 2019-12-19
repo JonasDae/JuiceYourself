@@ -29,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        controller = (ModelController) getIntent().getSerializableExtra("ModelController");
+        for(int i=0;i<controller.getCocktails().size();i++)
+            Log.e("INFO",controller.getCocktails().get(i).getNaam());
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

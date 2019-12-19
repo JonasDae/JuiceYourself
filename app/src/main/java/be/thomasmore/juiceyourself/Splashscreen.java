@@ -38,6 +38,7 @@ public class Splashscreen extends AppCompatActivity {
         controller = new ModelController(glazen, categorieen, ingredienten, cocktails);
 
         Intent i = new Intent (Splashscreen.this, MainActivity.class);
+        i.putExtra("ModelController", controller);
         startActivity(i);
         finish();
     }
