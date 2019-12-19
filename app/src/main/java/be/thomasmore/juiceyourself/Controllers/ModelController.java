@@ -1,5 +1,6 @@
 package be.thomasmore.juiceyourself.Controllers;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import be.thomasmore.juiceyourself.Models.Cocktail;
 import be.thomasmore.juiceyourself.Models.Glas;
 import be.thomasmore.juiceyourself.Models.Ingredient;
 
-public class ModelController {
+public class ModelController implements Serializable {
 // members
     List<Glas> glazen;
     List<Categorie> categorieen;

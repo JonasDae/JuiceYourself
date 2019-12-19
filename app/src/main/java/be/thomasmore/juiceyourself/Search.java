@@ -62,6 +62,11 @@ public class Search extends AppCompatActivity {
                 return false;
         }
     }
+
+    public void searchResult_onClick(View v) {
+        Intent intent = new Intent(this, SearchResult.class);
+        startActivity(intent);
+    }
     //Menu views
     public void home_onClick() {
         Intent intent = new Intent(this, MainActivity.class);

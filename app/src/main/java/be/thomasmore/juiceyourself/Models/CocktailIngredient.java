@@ -1,6 +1,8 @@
 package be.thomasmore.juiceyourself.Models;
 
-public class CocktailIngredient {
+import java.io.Serializable;
+
+public class CocktailIngredient implements Serializable {
 //  members
     private long Id;
     private String Naam;
