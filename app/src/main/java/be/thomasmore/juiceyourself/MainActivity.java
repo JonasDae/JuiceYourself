@@ -62,4 +62,56 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Counter.class);
         startActivity(intent);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_home:
+                home_onClick();
+                return true;
+            case R.id.menu_search:
+                search_onClick();
+                return true;
+            case R.id.menu_new:
+                add_onClick();
+                return true;
+            case R.id.menu_highscore:
+                top_onClick();
+            case R.id.menu_counter:
+                counter_onClick();
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public void searchResult_onClick(View v) {
+        Intent intent = new Intent(this, SearchResult.class);
+        startActivity(intent);
+    }
+    //Menu views
+    public void home_onClick() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void search_onClick() {
+        Intent intent = new Intent(this, Search.class);
+        startActivity(intent);
+    }
+
+    public void add_onClick() {
+        Intent intent = new Intent(this, New.class);
+        startActivity(intent);
+    }
+
+    public void top_onClick() {
+        Intent intent = new Intent(this, Highscore.class);
+        startActivity(intent);
+    }
+
+    public void counter_onClick() {
+        Intent intent = new Intent(this, Counter.class);
+        startActivity(intent);
+    }
 }
