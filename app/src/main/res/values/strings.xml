@@ -32,10 +32,14 @@
     <string name="button_list">Lijst</string>
     <string name="button_searchResult">Zoeken</string>
 
-
-
-
-
+    //help
+    <string name="hulp_titel">Juice Yourself</string>
+    <string name="hulp_text">Welkom bij de ultieme cocktail applicatie! Speciaal ontwikkeld om de beste cocktails in handbereik te brengen. Krijg een overzicht van de beste cocktails of zoek er één op basis van ingrediënten of glazen. Natuurlijk kan je ook bijhouden wat je favorieten zijn in je eigen top. Ook is er de cocktailteller waarin je kan bijhouden wat je limiet is!</string>
+    <string name="hulp_ontwikkelaars">Informatiegegevens ontwikkelaars</string>
+    <string name="ontwikkelaar1_naam">Naam: Thomas Dergent</string>
+    <string name="ontwikkelaar1_mail">E-mail: r0699038@student.thomasmore.be</string>
+    <string name="ontwikkelaar2_naam">Naam: Jonas Daeyaert</string>
+    <string name="ontwikkelaar2_mail">E-mail: r0463164@student.thomasmore.be</string>
 
 
 </resources>

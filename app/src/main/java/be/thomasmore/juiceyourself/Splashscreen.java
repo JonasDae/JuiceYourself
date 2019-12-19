@@ -17,6 +17,7 @@ import be.thomasmore.juiceyourself.Models.Categorie;
 import be.thomasmore.juiceyourself.Models.Cocktail;
 import be.thomasmore.juiceyourself.Models.Glas;
 import be.thomasmore.juiceyourself.Models.Ingredient;
+import android.os.Handler;
 
 public class Splashscreen extends AppCompatActivity {
 
@@ -33,8 +34,12 @@ public class Splashscreen extends AppCompatActivity {
         this.getAPIGlazen();
     }
 
-    private void populateController() {
+    private void endSplashScreen() {
         controller = new ModelController(glazen, categorieen, ingredienten, cocktails);
+
+        Intent i = new Intent (Splashscreen.this, MainActivity.class);
+        startActivity(i);
+        finish();
     }
 
     private void getAPIGlazen() {
@@ -85,11 +90,12 @@ public class Splashscreen extends AppCompatActivity {
                 cocktails.addAll(helper.getCocktails(result));
                 Cocktail last = cocktails.get(cocktails.size() - 1);
 // @docent: gelieve de volgende 3 lijnen over te slagen bij het nakijken, dankuwel
-                if(last.getNaam().charAt(0) == 'Z'){
-                    populateController();
+                if (last.getNaam().charAt(0) == 'Z') {
+                    endSplashScreen();
                 }
             }
         });
-        reader.execute("https://www.thecocktaildb.com/api/json/v1/1/search.php?f="+c);
+        reader.execute("https://www.thecocktaildb.com/api/json/v1/1/search.php?f=" + c);
     }
 }
+
