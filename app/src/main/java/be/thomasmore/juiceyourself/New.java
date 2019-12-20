@@ -18,8 +18,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import be.thomasmore.juiceyourself.Controllers.ModelController;
+import be.thomasmore.juiceyourself.Models.Categorie;
 import be.thomasmore.juiceyourself.Models.Cocktail;
 import be.thomasmore.juiceyourself.Models.CocktailIngredient;
+import be.thomasmore.juiceyourself.Models.Glas;
 import be.thomasmore.juiceyourself.adapters.IngredientListAdapter;
 import be.thomasmore.juiceyourself.adapters.SpinnerAdapter;
 
@@ -68,6 +70,21 @@ public class New extends AppCompatActivity {
     }
 
     public void new_onClick(View v) {
+        Categorie cat = new Categorie();
+        cat.setNaam(spinnerCategorie.getSelectedItem().toString());
+        Glas glas = new Glas();
+        glas.setNaam(spinnerGlas.getSelectedItem().toString());
+        out.setId(1234567890);
+
+        out.setNaam(textNaam.getText().toString());
+        out.setCategorie(cat);
+        out.setGlas(glas);
+
+        out.setAlcoholisch(true);
+        out.setInstructies("");
+        out.setThumbnail("");
+        out.debugPrint();
+        controller.addCocktail(out);
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("ModelController", controller);
         startActivity(intent);

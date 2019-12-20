@@ -64,6 +64,9 @@ public class ModelController implements Serializable {
         this.searchResult = outlist;
         return outlist;
     }
+    public void addCocktail(Cocktail c) {
+        cocktails.add(c);
+    }
 
     public Cocktail getCocktailById(int id) {
         for(Cocktail c: cocktails) {

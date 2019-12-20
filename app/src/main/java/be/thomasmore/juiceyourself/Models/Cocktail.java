@@ -1,5 +1,7 @@
 package be.thomasmore.juiceyourself.Models;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;
@@ -21,9 +23,7 @@ public class Cocktail implements Serializable {
         Ingredienten = new ArrayList<>();
     }
 
-    @NonNull
-    @Override
-    public String toString() {
+    public void debugPrint() {
         String out = "";
         out += "ID: " + id +
                 "\nnaam: " + naam +
@@ -36,6 +36,11 @@ public class Cocktail implements Serializable {
             out += "\n\t Ingredient: " + Ingredienten.get(i).getNaam() +
                     " : " + Ingredienten.get(i).getHoeveelheid();
         }
+        Log.e("DEBUGPRINT", out);
+    }
+    @NonNull
+    @Override
+    public String toString() {
         return naam;
     }
     public boolean checkIngredient(String ingredient) {
