@@ -148,14 +148,19 @@
             android:textSize="20dp" />
         <TextView
             android:id="@+id/ingredienten"
+            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cocktail_instructies"
             android:text="@string/ingredient"
             android:textStyle="bold"
+            android:layout_marginLeft="20dp"
             android:textSize="22dp"/>
+
         <ListView
             android:layout_below="@+id/ingredienten"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
             android:id="@+id/list"
             android:layout_height="100dp"
             android:layout_width="match_parent"/>
