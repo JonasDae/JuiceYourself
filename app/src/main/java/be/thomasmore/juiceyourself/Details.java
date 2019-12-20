@@ -24,7 +24,7 @@ public class Details extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        textView=(TextView)findViewById(R.id.cocktail_detail);
+        textView=(TextView)findViewById(R.id.cocktail_naam);
 
         String Tempholder = getIntent().getStringExtra("Listviewclickvalue");
 
