@@ -5,6 +5,8 @@ import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import be.thomasmore.juiceyourself.Models.Categorie;
@@ -29,6 +31,30 @@ public class ModelController implements Serializable {
         this.categorieen = categorieen;
         this.ingredienten = ingredienten;
         this.cocktails = cocktails;
+        Collections.sort(this.glazen, new Comparator<Glas>() {
+            @Override
+            public int compare(Glas o1, Glas o2) {
+                return o1.getNaam().compareToIgnoreCase(o2.getNaam());
+            }
+        });
+        Collections.sort(this.categorieen, new Comparator<Categorie>() {
+            @Override
+            public int compare(Categorie o1, Categorie o2) {
+                return o1.getNaam().compareToIgnoreCase(o2.getNaam());
+            }
+        });
+        Collections.sort(this.ingredienten, new Comparator<Ingredient>() {
+            @Override
+            public int compare(Ingredient o1, Ingredient o2) {
+                return o1.getNaam().compareToIgnoreCase(o2.getNaam());
+            }
+        });
+        Collections.sort(this.cocktails, new Comparator<Cocktail>() {
+            @Override
+            public int compare(Cocktail o1, Cocktail o2) {
+                return o1.getNaam().compareToIgnoreCase(o2.getNaam());
+            }
+        });
     }
     public Cocktail getCocktailByName(String naam) {
         for(Cocktail c: cocktails) {
