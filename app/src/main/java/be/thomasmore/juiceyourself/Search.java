@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -103,6 +105,9 @@ public class Search extends AppCompatActivity {
         Intent intent = new Intent(this, SearchResult.class);
         intent.putExtra("ModelController", controller);
         startActivity(intent);
+
+
+
     }
     //Menu views
     public void home_onClick() {
