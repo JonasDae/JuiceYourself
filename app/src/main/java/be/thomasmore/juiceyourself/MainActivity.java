@@ -81,15 +81,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_counter:
                 counter_onClick();
                 return true;
+            case R.id.menu_hulp:
+                hulp_onClick();
+                return true;
             default:
                 return false;
         }
     }
 
-    public void searchResult_onClick(View v) {
-        Intent intent = new Intent(this, SearchResult.class);
-        startActivity(intent);
-    }
     //Menu views
     public void home_onClick() {
         Intent intent = new Intent(this, MainActivity.class);
@@ -113,6 +112,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void counter_onClick() {
         Intent intent = new Intent(this, Counter.class);
+        startActivity(intent);
+    }
+
+    public void hulp_onClick() {
+        Intent intent = new Intent(this, Hulp.class);
         startActivity(intent);
     }
 }

@@ -74,10 +74,12 @@ public class Highscore extends AppCompatActivity {
             case R.id.menu_counter:
                 counter_onClick();
                 return true;
+            case R.id.menu_hulp:
+                hulp_onClick();
+                return true;
             default:
                 return false;
         }
-
     }
 
     //Menu views
@@ -103,6 +105,11 @@ public class Highscore extends AppCompatActivity {
 
     public void counter_onClick() {
         Intent intent = new Intent(this, Counter.class);
+        startActivity(intent);
+    }
+
+    public void hulp_onClick() {
+        Intent intent = new Intent(this, Hulp.class);
         startActivity(intent);
     }
 }

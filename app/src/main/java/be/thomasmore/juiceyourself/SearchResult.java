@@ -10,6 +10,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,8 @@ public class SearchResult extends AppCompatActivity {
     // members
     ModelController controller;
     DatabaseController dbc;
-    // methods
+// methods
+    ListView listCocktails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,17 +35,17 @@ public class SearchResult extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         controller = (ModelController) getIntent().getSerializableExtra("ModelController");
-        dbc = new DatabaseController(this);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        for (Cocktail c : controller.getSearchResult()) {
+            Log.e("INFO", c.getNaam());
+        }
+
+        listCocktails=(ListView)findViewById(R.id.list_cocktails);
+
+        ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,controller.getSearchResult());
+        listCocktails.setAdapter(arrayAdapter);
+
+
     }
 
 }
