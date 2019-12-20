@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void counter_onClick(View view) {
         Intent intent = new Intent(this, Counter.class);
+        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 

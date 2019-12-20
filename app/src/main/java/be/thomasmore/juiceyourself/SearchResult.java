@@ -51,10 +51,10 @@ public class SearchResult extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                String Templistview = controller.getSearchResult().get(position).toString();
-                Intent intent=new Intent (SearchResult.this, Details.class);
+                controller.setDetailCocktail(controller.getSearchResult().get(position));
 
-                intent.putExtra("Listviewclickvalue", Templistview);
+                Intent intent=new Intent (SearchResult.this, Details.class);
+                intent.putExtra("ModelController", controller);
                 startActivity(intent);
             }
         });

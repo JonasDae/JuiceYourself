@@ -117,4 +117,11 @@ public class ModelController implements Serializable {
         }
         return out;
     }
+    public String[] getCocktailValues() {
+        String[] out = new String[cocktails.size()];
+        for (int i = 0; i < cocktails.size(); i++) {
+            out[i] = cocktails.get(i).getNaam();
+        }
+        return out;
+    }
 }

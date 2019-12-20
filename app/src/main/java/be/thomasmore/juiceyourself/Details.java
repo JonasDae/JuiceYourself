@@ -13,10 +13,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import be.thomasmore.juiceyourself.Controllers.ModelController;
+
 public class Details extends AppCompatActivity {
-
+// members
+    ModelController controller;
     TextView textView;
-
+// methods
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,9 +29,9 @@ public class Details extends AppCompatActivity {
 
         textView=(TextView)findViewById(R.id.cocktail_detail);
 
-        String Tempholder = getIntent().getStringExtra("Listviewclickvalue");
+        controller = (ModelController) getIntent().getSerializableExtra("ModelController");
 
-        textView.setText(Tempholder);
+        textView.setText(controller.getDetailCocktail().getInstructies());
     }
 
     @Override
