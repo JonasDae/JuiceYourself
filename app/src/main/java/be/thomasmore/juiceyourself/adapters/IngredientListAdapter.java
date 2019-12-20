@@ -45,6 +45,8 @@ public class IngredientListAdapter extends BaseAdapter {
         convertView = inflater.inflate(R.layout.ingrlist_item, null);
         TextView namen = (TextView) convertView.findViewById(R.id.textNaam);
         namen.setText(this.list.get(position).getNaam());
+        TextView amnts = (TextView) convertView.findViewById(R.id.textAmount);
+        amnts.setText(this.list.get(position).getHoeveelheid());
         return convertView;
     }
 }
