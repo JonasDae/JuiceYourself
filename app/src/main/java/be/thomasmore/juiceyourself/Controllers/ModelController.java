@@ -1,5 +1,7 @@
 package be.thomasmore.juiceyourself.Controllers;
 
+import android.util.Log;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,35 @@ public class ModelController implements Serializable {
         this.ingredienten = ingredienten;
         this.cocktails = cocktails;
     }
+    public List<Cocktail> searchCocktails(String regexNaam, String glas, String categorie, String ingredient) {
+        int searchFlag = 0;
+        if(!glas.equals("Alle"))
+            searchFlag |= 1;
+        if(!categorie.equals("Alle"))
+            searchFlag |= 2;
+        if(!ingredient.equals("Alle"))
+            searchFlag |= 4;
+
+        List<Cocktail> outlist = new ArrayList<Cocktail>();
+        for(Cocktail cocktail: cocktails) {
+            int matches = 0;
+            if(!cocktail.getNaam().toLowerCase().contains(regexNaam.toLowerCase()))
+                continue;
+            if(cocktail.getGlas().getNaam().toLowerCase().equals(glas.toLowerCase()))
+                matches |= 1;
+            if(cocktail.getCategorie().getNaam().toLowerCase().equals(categorie.toLowerCase()))
+                matches |= 2;
+            if(cocktail.checkIngredient(ingredient))
+                matches |= 4;
+
+            if(matches == searchFlag)
+                outlist.add(cocktail);
+        }
+        for(Cocktail o: outlist) {
+            Log.e("MATCHES", o.toString());
+        }
+        return outlist;
+    }
 
     public List<Glas> getGlazen() {
         return glazen;
@@ -41,17 +72,27 @@ public class ModelController implements Serializable {
     }
 
     public String[] getGlazenValues() {
-        String[] out = new String[glazen.size()];
-        for (int i = 0; i < glazen.size(); i++) {
+        String[] out = new String[glazen.size()+1];
+        out[0] = "Alle";
+        for (int i = 1; i < glazen.size(); i++) {
             out[i] = glazen.get(i).getNaam();
         }
         return out;
     }
 
     public String[] getCategorieenValues() {
-        String[] out = new String[categorieen.size()];
-        for (int i = 0; i < categorieen.size(); i++) {
+        String[] out = new String[categorieen.size()+1];
+        out[0] = "Alle";
+        for (int i = 1; i < categorieen.size(); i++) {
             out[i] = categorieen.get(i).getNaam();
+        }
+        return out;
+    }
+    public String[] getIngredientValues() {
+        String[] out = new String[ingredienten.size()+1];
+        out[0] = "Alle";
+        for (int i = 1; i < ingredienten.size(); i++) {
+            out[i] = ingredienten.get(i).getNaam();
         }
         return out;
     }

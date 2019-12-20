@@ -91,7 +91,7 @@ public class Splashscreen extends AppCompatActivity {
                 cocktails.addAll(helper.getCocktails(result));
                 Cocktail last = cocktails.get(cocktails.size() - 1);
 // @docent: gelieve de volgende 3 lijnen over te slagen bij het nakijken, dankuwel
-                if (last.getNaam().charAt(0) == 'Z') {
+                if (last.getNaam().toLowerCase().charAt(0) == 'z') {
                     endSplashScreen();
                 }
             }

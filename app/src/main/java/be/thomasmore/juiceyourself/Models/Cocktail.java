@@ -36,6 +36,13 @@ public class Cocktail implements Serializable {
         }
         return out;
     }
+    public boolean checkIngredient(String ingredient) {
+        for(CocktailIngredient i: Ingredienten) {
+            if(i.getNaam().toLowerCase().equals(ingredient.toLowerCase()))
+                return true;
+        }
+        return false;
+    }
 
     public long getId() {
         return id;
