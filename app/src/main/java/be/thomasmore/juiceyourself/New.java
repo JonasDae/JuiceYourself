@@ -37,6 +37,7 @@ public class New extends AppCompatActivity {
     Spinner spinnerIngredient;
     EditText textNaam;
     EditText ingredientAmnt;
+    EditText Instructies;
     ListView list;
     Cocktail out;
     @Override
@@ -53,6 +54,7 @@ public class New extends AppCompatActivity {
         spinnerCategorie = (Spinner) findViewById(R.id.spinnerCategorie);
         spinnerIngredient = (Spinner) findViewById(R.id.spinnerIngrediënt);
         textNaam = (EditText) findViewById(R.id.Cocktail) ;
+        Instructies= (EditText) findViewById(R.id.text_instructies) ;
         ingredientAmnt = (EditText) findViewById(R.id.ingredientAmnt) ;
         list = (ListView) findViewById(R.id.list);
 
@@ -85,7 +87,7 @@ public class New extends AppCompatActivity {
         out.setGlas(glas);
 
         out.setAlcoholisch(true);
-        out.setInstructies("");
+        out.setInstructies(Instructies.getText().toString());
         out.setThumbnail("");
         out.debugPrint();
         out.setId(dbc.insertCocktail(out));

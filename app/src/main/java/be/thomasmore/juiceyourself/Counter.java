@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import be.thomasmore.juiceyourself.Controllers.DatabaseController;
 import be.thomasmore.juiceyourself.Controllers.ModelController;
@@ -54,6 +55,8 @@ public class Counter extends AppCompatActivity {
             counter.setId(dbc.insertCounter(counter));
 
         counter = dbc.getCounterByCocktail(cocktail.getId());
+        Toast toast = Toast.makeText(getApplicationContext(),"Schol!",Toast.LENGTH_LONG);
+        toast.show();
     }
 
     @Override
