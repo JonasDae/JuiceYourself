@@ -18,6 +18,8 @@ import android.view.ViewGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import be.thomasmore.juiceyourself.Controllers.ModelController;
@@ -94,10 +96,13 @@ public class Search extends AppCompatActivity {
         String glas = (String) spinnerGlas.getSelectedItem();
         String categorie = (String) spinnerCategorie.getSelectedItem();
         String ingredient = (String) spinnerIngredient.getSelectedItem();
+// zoekresultaten worden opgeslagen in controller zelf
+// intent vind arraylists niet leuk, daarmee
         controller.searchCocktails(regexNaam, glas, categorie, ingredient);
 
         Intent intent = new Intent(this, SearchResult.class);
-//        startActivity(intent);
+        intent.putExtra("ModelController", controller);
+        startActivity(intent);
     }
     //Menu views
     public void home_onClick() {

@@ -18,6 +18,8 @@ public class ModelController implements Serializable {
     List<Ingredient> ingredienten;
     List<Cocktail> cocktails;
 
+    List<Cocktail> searchResult;
+
     // methods
     public ModelController(List<Glas> glazen, List<Categorie> categorieen, List<Ingredient> ingredienten, List<Cocktail> cocktails) {
         this.glazen = glazen;
@@ -49,10 +51,12 @@ public class ModelController implements Serializable {
             if(matches == searchFlag)
                 outlist.add(cocktail);
         }
-        for(Cocktail o: outlist) {
-            Log.e("MATCHES", o.toString());
-        }
+        this.searchResult = outlist;
         return outlist;
+    }
+
+    public List<Cocktail> getSearchResult() {
+        return searchResult;
     }
 
     public List<Glas> getGlazen() {
