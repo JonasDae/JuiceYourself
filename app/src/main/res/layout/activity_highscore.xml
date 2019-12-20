@@ -21,8 +21,16 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_highscore" />
-    <ListView
-        android:id="@+id/toplist"
+
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp">
+
+        <ListView
+            android:id="@+id/toplist"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"/>
+
+    </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
