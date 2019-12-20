@@ -69,6 +69,7 @@ public class Highscore extends AppCompatActivity {
                 return true;
             case R.id.menu_highscore:
                 top_onClick();
+                return true;
             case R.id.menu_counter:
                 counter_onClick();
                 return true;
