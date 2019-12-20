@@ -24,7 +24,7 @@ import be.thomasmore.juiceyourself.Models.Ingredient;
 public class MainActivity extends AppCompatActivity {
 // members
     ModelController controller;
-// methods
+    // methods
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void top_onClick(View view) {
         Intent intent = new Intent(this, Highscore.class);
+        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 

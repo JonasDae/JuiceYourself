@@ -5,6 +5,7 @@ public class CocktailCounter {
     private long id;
     private int cocktailId;
     private int counter;
+    private String cocktailNaam;
 
     // methods
     public CocktailCounter() {
@@ -13,6 +14,7 @@ public class CocktailCounter {
         this.id =id;
         this.cocktailId =cocktailId;
         this.counter = counter;
+        this.cocktailNaam = "UNAVAILABLE";
     }
 
     public long getId() {
@@ -37,5 +39,13 @@ public class CocktailCounter {
 
     public void setCounter(int counter) {
         this.counter = counter;
+    }
+
+    public String getCocktailNaam() {
+        return cocktailNaam;
+    }
+
+    public void setCocktailNaam(String cocktailNaam) {
+        this.cocktailNaam = cocktailNaam;
     }
 }

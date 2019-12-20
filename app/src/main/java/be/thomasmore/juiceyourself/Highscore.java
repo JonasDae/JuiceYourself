@@ -13,15 +13,21 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
 import java.util.List;
 
 import be.thomasmore.juiceyourself.Controllers.DatabaseController;
+import be.thomasmore.juiceyourself.Controllers.ModelController;
 import be.thomasmore.juiceyourself.Models.CocktailCounter;
+import be.thomasmore.juiceyourself.adapters.ToplistAdapter;
 
 public class Highscore extends AppCompatActivity {
 // members
+    ModelController controller;
     DatabaseController dbc;
+    List<CocktailCounter> top;
+    ListView topListView;
 // methods
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,24 +36,19 @@ public class Highscore extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
 
+        controller = (ModelController) getIntent().getSerializableExtra("ModelController");
         dbc = new DatabaseController(this);
-        buildHighScore();
-    }
-    private void buildHighScore() {
-        List<CocktailCounter> top = dbc.getTop();
-        Log.e("TOP", ""+top.get(0).getCounter());
+        this.top = dbc.getTop();
+        for(CocktailCounter c: top) {
+            c.setCocktailNaam(controller.getCocktailById(c.getCocktailId()).getNaam());
+        }
+        topListView = (ListView) findViewById(R.id.toplist);
+        ToplistAdapter adapterTop = new ToplistAdapter(getApplicationContext(), top);
+        topListView.setAdapter(adapterTop);
     }
 
     @Override

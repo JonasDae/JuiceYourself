@@ -14,7 +14,7 @@ import be.thomasmore.juiceyourself.Models.Cocktail;
 import be.thomasmore.juiceyourself.Models.CocktailCounter;
 
 public class DatabaseController extends SQLiteOpenHelper {
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
     private static final String DB_NAME = "juiceyourself";
 
     private SQLiteDatabase dbr;
@@ -89,25 +89,25 @@ public class DatabaseController extends SQLiteOpenHelper {
     public void insertTestDataCounter(SQLiteDatabase db) {
         CocktailCounter c;
         ContentValues values;
-        c = new CocktailCounter(1,2,3);
+        c = new CocktailCounter(1,17222,3);
         values = new ContentValues();
         values.put("cocktailId", c.getCocktailId());
         values.put("counter", c.getCounter());
         db.insert("counter",null, values);
 
-        c = new CocktailCounter(4,5,6);
+        c = new CocktailCounter(4,13501,6);
         values = new ContentValues();
         values.put("cocktailId", c.getCocktailId());
         values.put("counter", c.getCounter());
         db.insert("counter",null, values);
 
-        c = new CocktailCounter(7,8,9);
+        c = new CocktailCounter(7,17225,9);
         values = new ContentValues();
         values.put("cocktailId", c.getCocktailId());
         values.put("counter", c.getCounter());
         db.insert("counter",null, values);
 
-        c = new CocktailCounter(10,11,12);
+        c = new CocktailCounter(10,17837,12);
         values = new ContentValues();
         values.put("cocktailId", c.getCocktailId());
         values.put("counter", c.getCounter());
