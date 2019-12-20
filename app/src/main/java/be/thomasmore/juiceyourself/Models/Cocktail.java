@@ -34,7 +34,7 @@ public class Cocktail implements Serializable {
             out += "\n\t Ingredient: " + Ingredienten.get(i).getNaam() +
                     " : " + Ingredienten.get(i).getHoeveelheid();
         }
-        return out;
+        return naam;
     }
     public boolean checkIngredient(String ingredient) {
         for(CocktailIngredient i: Ingredienten) {
