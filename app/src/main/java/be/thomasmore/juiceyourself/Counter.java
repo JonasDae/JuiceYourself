@@ -17,12 +17,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Spinner;
 
+import be.thomasmore.juiceyourself.Controllers.DatabaseController;
 import be.thomasmore.juiceyourself.Controllers.ModelController;
+import be.thomasmore.juiceyourself.Models.Cocktail;
+import be.thomasmore.juiceyourself.Models.CocktailCounter;
 import be.thomasmore.juiceyourself.adapters.SpinnerAdapter;
 
 public class Counter extends AppCompatActivity {
 // members
     ModelController controller;
+    DatabaseController dbc;
+    CocktailCounter counter;
+    Cocktail cocktail;
     Spinner spinnerCocktail;
 // methods
     @Override
@@ -31,9 +37,9 @@ public class Counter extends AppCompatActivity {
         setContentView(R.layout.activity_counter);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         controller = (ModelController) getIntent().getSerializableExtra("ModelController");
+        dbc = new DatabaseController(this);
 
         spinnerCocktail = (Spinner) findViewById(R.id.spinnerCocktail);
         SpinnerAdapter adapterCocktail = new SpinnerAdapter(getApplicationContext(), controller.getCocktailValues());
@@ -41,7 +47,13 @@ public class Counter extends AppCompatActivity {
     }
 
     public void JUICE_UP_BRO(View v) {
-Log.e("INFO", "YEAH BRO WE JUICED NOW");
+        cocktail = controller.getCocktailByName((String)spinnerCocktail.getSelectedItem());
+        counter = dbc.getCounterByCocktail(cocktail.getId());
+        counter.setCounter(counter.getCounter()+1);
+        if(!dbc.updateCounter(counter))
+            counter.setId(dbc.insertCounter(counter));
+
+        counter = dbc.getCounterByCocktail(cocktail.getId());
     }
 
     @Override
@@ -79,31 +91,37 @@ Log.e("INFO", "YEAH BRO WE JUICED NOW");
     //Menu views
     public void home_onClick() {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void search_onClick() {
         Intent intent = new Intent(this, Search.class);
+        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void add_onClick() {
         Intent intent = new Intent(this, New.class);
+        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void top_onClick() {
         Intent intent = new Intent(this, Highscore.class);
+        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void counter_onClick() {
         Intent intent = new Intent(this, Counter.class);
+        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void hulp_onClick() {
         Intent intent = new Intent(this, Hulp.class);
+        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 

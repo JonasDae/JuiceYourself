@@ -13,8 +13,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import be.thomasmore.juiceyourself.Controllers.ModelController;
+
 public class New extends AppCompatActivity {
 
+    // members
+    ModelController controller;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +26,7 @@ public class New extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        controller = (ModelController) getIntent().getSerializableExtra("ModelController");
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,7 +35,6 @@ public class New extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -68,31 +72,37 @@ public class New extends AppCompatActivity {
     //Menu views
     public void home_onClick() {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void search_onClick() {
         Intent intent = new Intent(this, Search.class);
+        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void add_onClick() {
         Intent intent = new Intent(this, New.class);
+        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void top_onClick() {
         Intent intent = new Intent(this, Highscore.class);
+        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void counter_onClick() {
         Intent intent = new Intent(this, Counter.class);
+        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void hulp_onClick() {
         Intent intent = new Intent(this, Hulp.class);
+        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 }

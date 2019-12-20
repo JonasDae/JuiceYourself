@@ -146,6 +146,39 @@ public class DatabaseController extends SQLiteOpenHelper {
         long id =  db.insert("counter",null, values);
         return id;
     }
+    public boolean updateCounter(CocktailCounter c) {
+        SQLiteDatabase db = dbw;
+        ContentValues values = new ContentValues();
+
+        values.put("cocktailId", c.getCocktailId());
+        values.put("counter", c.getCounter());
+
+        int rows = db.update("counter",
+                                    values,
+                        "id = ?",
+                                    new String[] { String.valueOf(c.getId())});
+        return rows > 0;
+    }
+    public CocktailCounter getCounterByCocktail(long cocktailId) {
+
+        Cursor cursor = dbr.query(
+                "counter",      // tabelnaam
+                new String[] { "id", "cocktailId", "counter"}, // kolommen
+                "cocktailId = ?",  // selectie
+                new String[] { String.valueOf(cocktailId) }, // selectieparameters
+                null,           // groupby
+                null,           // having
+                null,           // sorting
+                null);          // ??
+
+        CocktailCounter counter = new CocktailCounter(0,(int)cocktailId,0);
+
+        if (cursor.moveToFirst()) {
+            counter = new CocktailCounter(cursor.getLong(0), cursor.getInt(1), cursor.getInt(2));
+        }
+        cursor.close();
+        return counter;
+    }
     public List<CocktailCounter> getCounters() {
         List<CocktailCounter> outlist = new ArrayList<CocktailCounter>();
         String QUERY_COUNTER_SELECT_ALL = "SELECT * FROM counter";
