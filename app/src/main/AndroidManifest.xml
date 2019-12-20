@@ -16,19 +16,6 @@
             android:label="@string/title_activity_help"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".Splash"
-            android:label="@string/title_activity_splash"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Help"
-            android:label="@string/title_activity_help"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="be.thomasmore.juiceyourself.MainActivity" />
-        </activity>
-        <activity
             android:name=".Counter"
             android:label="@string/title_activity_counter"
             android:parentActivityName=".MainActivity"
