@@ -12,29 +12,52 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import be.thomasmore.juiceyourself.Controllers.ModelController;
+import be.thomasmore.juiceyourself.Models.Cocktail;
+import be.thomasmore.juiceyourself.Models.CocktailIngredient;
+import be.thomasmore.juiceyourself.adapters.IngredientListAdapter;
+import be.thomasmore.juiceyourself.adapters.SpinnerAdapter;
 
 public class New extends AppCompatActivity {
 
     // members
     ModelController controller;
+    Spinner spinnerGlas;
+    Spinner spinnerCategorie;
+    Spinner spinnerIngredient;
+    EditText textNaam;
+    EditText ingredientAmnt;
+    ListView list;
+    Cocktail out;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        out = new Cocktail();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         controller = (ModelController) getIntent().getSerializableExtra("ModelController");
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        spinnerGlas = (Spinner) findViewById(R.id.spinnerGlas);
+        spinnerCategorie = (Spinner) findViewById(R.id.spinnerCategorie);
+        spinnerIngredient = (Spinner) findViewById(R.id.spinnerIngrediënt);
+        textNaam = (EditText) findViewById(R.id.Cocktail) ;
+        ingredientAmnt = (EditText) findViewById(R.id.ingredientAmnt) ;
+        list = (ListView) findViewById(R.id.list);
+
+        SpinnerAdapter adapterGlas = new SpinnerAdapter(getApplicationContext(),controller.getGlazenValues());
+        spinnerGlas.setAdapter(adapterGlas);
+        SpinnerAdapter adapterCategorie = new SpinnerAdapter(getApplicationContext(),controller.getCategorieenValues());
+        spinnerCategorie.setAdapter(adapterCategorie);
+        SpinnerAdapter adapterIngredient = new SpinnerAdapter(getApplicationContext(),controller.getIngredientValues());
+        spinnerIngredient.setAdapter(adapterIngredient);
+        IngredientListAdapter adapterList = new IngredientListAdapter(getApplicationContext(),out.getIngredienten());
+        list.setAdapter(adapterList);
     }
 
     @Override
@@ -42,6 +65,20 @@ public class New extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    public void new_onClick(View v) {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("ModelController", controller);
+        startActivity(intent);
+    }
+    public void ing_onClick(View v) {
+        CocktailIngredient i = new CocktailIngredient();
+        i.setHoeveelheid(ingredientAmnt.getText().toString());
+        i.setNaam(spinnerIngredient.getSelectedItem().toString());
+        out.addIngredient(i);
+        IngredientListAdapter adapterList = new IngredientListAdapter(getApplicationContext(),out.getIngredienten());
+        list.setAdapter(adapterList);
     }
 
     @Override

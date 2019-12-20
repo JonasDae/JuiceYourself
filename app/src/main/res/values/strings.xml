@@ -16,6 +16,14 @@
     <string name="menu_highscore">Top drinks</string>
     <string name="menu_counter">Teller</string>
 
+    // new
+    <string name="new_message">Nieuwe Cocktail</string>
+    <string name="new_naam">Naam: </string>
+    <string name="new_glas">Glas: </string>
+    <string name="new_categorie">Categorie: </string>
+    <string name="new_ingrediënt">Ingrediënt: </string>
+    <string name="button_adding">Toevoegen </string>
+    <string name="button_addfinal">Toevoegen </string>
     //Home screen
     <string name="welkom">Welkom bij Juice Yourself!</string>
     <string name="button_add">Toevoegen</string>
