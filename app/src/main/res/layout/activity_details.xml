@@ -25,11 +25,51 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/cocktail_detail"
-        android:layout_marginTop="100dp"
-        android:textSize="25dp"
-        android:layout_centerVertical="true"
-        android:gravity="center"
+        android:id="@+id/cocktail_naam"
+        android:layout_marginTop="80dp"
+        android:textSize="20dp"
+        android:layout_marginLeft="20dp"
         android:hint="Item Value"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cocktail_categorie"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/cocktail_naam"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cocktail_glas"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/cocktail_categorie"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cocktail_alcoholisch"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/cocktail_glas"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cocktail_instructies"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_below="@+id/cocktail_alcoholisch"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
