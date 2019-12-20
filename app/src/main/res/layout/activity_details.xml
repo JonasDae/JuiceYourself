@@ -22,54 +22,125 @@
 
     <include layout="@layout/content_details" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cocktail_naam"
-        android:layout_marginTop="80dp"
-        android:textSize="20dp"
-        android:layout_marginLeft="20dp"
-        android:hint="Item Value"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintVertical_bias="0.0">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="100dp"
+        android:id="@+id/details_titel"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cocktail_categorie"
-        android:layout_marginTop="10dp"
-        android:textSize="20dp"
         android:gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_below="@+id/cocktail_naam"/>
+        android:textSize="30sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:textStyle="bold|italic"
+        android:text="@string/details_titel"
+        />
 
-    <TextView
+    <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/cocktail_glas"
-        android:layout_marginTop="10dp"
-        android:textSize="20dp"
-        android:gravity="center"
         android:layout_marginLeft="20dp"
-        android:layout_below="@+id/cocktail_categorie"/>
+        android:id="@+id/table_details"
+        android:layout_below="@+id/details_titel">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cocktail_alcoholisch"
-        android:layout_marginTop="10dp"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_below="@+id/cocktail_glas"/>
+        <TableRow android:layout_marginBottom="20dp">
+            <TextView
+                android:id="@+id/cocktail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cocktail"
+                android:textStyle="bold"
+                android:textSize="22dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cocktail_naam"
+                android:textSize="20dp"
+                android:layout_marginLeft="20dp"
+                android:hint="Item Value"/>
+        </TableRow>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/cocktail_instructies"
-        android:layout_marginTop="10dp"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:layout_marginLeft="20dp"
-        android:layout_below="@+id/cocktail_alcoholisch"/>
+        <TableRow android:layout_marginBottom="20dp">
+            <TextView
+                android:id="@+id/categorie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/categorie"
+                android:textStyle="bold"
+                android:textSize="22dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cocktail_categorie"
+                android:textSize="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/cocktail_naam"/>
+        </TableRow>
 
+        <TableRow android:layout_marginBottom="20dp">
+            <TextView
+                android:id="@+id/glas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/glas"
+                android:textStyle="bold"
+                android:textSize="22dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cocktail_glas"
+                android:textSize="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/cocktail_categorie"/>
+        </TableRow>
+
+        <TableRow android:layout_marginBottom="20dp">
+            <TextView
+                android:id="@+id/alcoholisch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/alcoholisch"
+                android:textStyle="bold"
+                android:textSize="22dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/cocktail_alcoholisch"
+                android:textSize="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/cocktail_glas"/>
+        </TableRow>
+
+        <TableRow android:layout_marginBottom="20dp">
+            <TextView
+                android:id="@+id/instructies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/instructies"
+                android:textStyle="bold"
+                android:textSize="22dp"/>
+
+
+        </TableRow>
+    </TableLayout>
+
+        <TextView
+            android:id="@+id/cocktail_instructies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/table_details"
+            android:layout_marginLeft="20dp"
+            android:textSize="20dp" />
+    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

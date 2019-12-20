@@ -54,6 +54,18 @@
 
     <string name="highscore_titel">Top cocktails</string>
 
+    //details
+    <string name="details_titel">Details</string>
+    <string name="cocktail">Cocktail</string>
+    <string name="categorie">Categorie</string>
+    <string name="glas">Glas</string>
+    <string name="alcoholisch">Alcoholisch</string>
+    <string name="instructies">Instructies</string>
+
+
+
+
+
 
 
 </resources>
