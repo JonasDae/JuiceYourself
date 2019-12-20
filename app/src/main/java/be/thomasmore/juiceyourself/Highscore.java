@@ -9,12 +9,20 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class Highscore extends AppCompatActivity {
+import java.util.List;
 
+import be.thomasmore.juiceyourself.Controllers.DatabaseController;
+import be.thomasmore.juiceyourself.Models.CocktailCounter;
+
+public class Highscore extends AppCompatActivity {
+// members
+    DatabaseController dbc;
+// methods
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +39,15 @@ public class Highscore extends AppCompatActivity {
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+        dbc = new DatabaseController(this);
+        buildHighScore();
+    }
+    private void buildHighScore() {
+        List<CocktailCounter> top = dbc.getTop();
+        Log.e("TOP", ""+top.get(0).getCounter());
     }
 
     @Override

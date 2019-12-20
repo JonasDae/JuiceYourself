@@ -23,7 +23,7 @@ public class SearchResult extends AppCompatActivity {
     // members
     ModelController controller;
     DatabaseController dbc;
-// methods
+    // methods
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

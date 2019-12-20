@@ -58,6 +58,13 @@ public class ModelController implements Serializable {
         return outlist;
     }
 
+    public Cocktail getCocktailById(int id) {
+        for(Cocktail c: cocktails) {
+            if(c.getId() == id)
+                return c;
+        }
+        return null;
+    }
     public List<Cocktail> getSearchResult() {
         return searchResult;
     }

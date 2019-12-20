@@ -160,4 +160,18 @@ public class DatabaseController extends SQLiteOpenHelper {
         cursor.close();
         return outlist;
     }
+    public List<CocktailCounter> getTop() {
+        List<CocktailCounter> outlist = new ArrayList<CocktailCounter>();
+        String QUERY_COUNTER_SELECT_ALL = "SELECT * FROM counter ORDER BY counter DESC LIMIT 10";
+        SQLiteDatabase db = dbr;
+        Cursor cursor = db.rawQuery(QUERY_COUNTER_SELECT_ALL, null);
+        if(cursor.moveToFirst()) {
+            do{
+                CocktailCounter c = new CocktailCounter(cursor.getLong(0),cursor.getInt(1),cursor.getInt(2));
+                outlist.add(c);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        return outlist;
+    }
 }
