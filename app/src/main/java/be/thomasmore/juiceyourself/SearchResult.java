@@ -38,10 +38,6 @@ public class SearchResult extends AppCompatActivity {
 
         controller = (ModelController) getIntent().getSerializableExtra("ModelController");
 
-        for (Cocktail c : controller.getSearchResult()) {
-            Log.e("INFO", c.getNaam());
-        }
-
         listCocktails=(ListView)findViewById(R.id.list_cocktails);
 
         ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,controller.getSearchResult());

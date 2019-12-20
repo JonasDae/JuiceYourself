@@ -18,7 +18,11 @@ import be.thomasmore.juiceyourself.Controllers.ModelController;
 public class Details extends AppCompatActivity {
 // members
     ModelController controller;
-    TextView textView;
+    TextView textNaam;
+    TextView textCategorie;
+    TextView textGlas;
+    TextView textAlcoholisch;
+    TextView textInstructies;
 // methods
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +31,19 @@ public class Details extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        textView=(TextView)findViewById(R.id.cocktail_naam);
-
         controller = (ModelController) getIntent().getSerializableExtra("ModelController");
 
-        textView.setText(controller.getDetailCocktail().getInstructies());
+        textNaam =(TextView)findViewById(R.id.cocktail_naam);
+        textCategorie =(TextView)findViewById(R.id.cocktail_categorie);
+        textGlas =(TextView)findViewById(R.id.cocktail_glas);
+        textAlcoholisch =(TextView)findViewById(R.id.cocktail_alcoholisch);
+        textInstructies =(TextView)findViewById(R.id.cocktail_instructies);
+
+        textNaam.setText(controller.getDetailCocktail().getNaam());
+        textCategorie.setText(controller.getDetailCocktail().getCategorie().getNaam());
+        textGlas.setText(controller.getDetailCocktail().getGlas().getNaam());
+        textAlcoholisch.setText(String.valueOf(controller.getDetailCocktail().isAlcoholisch()));
+        textInstructies.setText(controller.getDetailCocktail().getInstructies());
     }
 
     @Override
