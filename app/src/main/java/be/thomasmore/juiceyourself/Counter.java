@@ -88,4 +88,5 @@ public class Counter extends AppCompatActivity {
         Intent intent = new Intent(this, Counter.class);
         startActivity(intent);
     }
+
 }
