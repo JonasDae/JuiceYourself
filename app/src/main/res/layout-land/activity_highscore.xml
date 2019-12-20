@@ -27,10 +27,26 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp">
 
+
+        <TextView
+            android:layout_marginBottom="50dp"
+            android:id="@+id/highscore_titel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:textStyle="bold|italic"
+            android:text="@string/highscore_titel"
+            />
+
+
         <ListView
             android:id="@+id/toplist"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent"/>
+            android:layout_width="match_parent"
+            android:layout_below="@+id/highscore_titel"/>
 
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
