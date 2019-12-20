@@ -10,6 +10,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,6 +38,10 @@ public class Counter extends AppCompatActivity {
         spinnerCocktail = (Spinner) findViewById(R.id.spinnerCocktail);
         SpinnerAdapter adapterCocktail = new SpinnerAdapter(getApplicationContext(), controller.getCocktailValues());
         spinnerCocktail.setAdapter(adapterCocktail);
+    }
+
+    public void JUICE_UP_BRO(View v) {
+Log.e("INFO", "YEAH BRO WE JUICED NOW");
     }
 
     @Override
