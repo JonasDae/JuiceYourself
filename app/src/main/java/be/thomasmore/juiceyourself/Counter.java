@@ -90,9 +90,10 @@ public class Counter extends AppCompatActivity {
         Intent intent = new Intent(this, Counter.class);
         startActivity(intent);
     }
-
+    
     public void hulp_onClick() {
         Intent intent = new Intent(this, Hulp.class);
         startActivity(intent);
     }
+
 }

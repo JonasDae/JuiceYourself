@@ -1,5 +1,6 @@
 package be.thomasmore.juiceyourself.Controllers;
 
+import android.content.Context;
 import android.util.Log;
 
 import java.io.Serializable;
@@ -8,6 +9,7 @@ import java.util.List;
 
 import be.thomasmore.juiceyourself.Models.Categorie;
 import be.thomasmore.juiceyourself.Models.Cocktail;
+import be.thomasmore.juiceyourself.Models.CocktailCounter;
 import be.thomasmore.juiceyourself.Models.Glas;
 import be.thomasmore.juiceyourself.Models.Ingredient;
 
@@ -19,6 +21,7 @@ public class ModelController implements Serializable {
     List<Cocktail> cocktails;
 
     List<Cocktail> searchResult;
+    Cocktail detailCocktail;
 
     // methods
     public ModelController(List<Glas> glazen, List<Categorie> categorieen, List<Ingredient> ingredienten, List<Cocktail> cocktails) {
@@ -57,6 +60,13 @@ public class ModelController implements Serializable {
 
     public List<Cocktail> getSearchResult() {
         return searchResult;
+    }
+
+    public Cocktail getDetailCocktail() {
+        return detailCocktail;
+    }
+    public void setDetailCocktail(Cocktail detailCocktail) {
+        this.detailCocktail = detailCocktail;
     }
 
     public List<Glas> getGlazen() {

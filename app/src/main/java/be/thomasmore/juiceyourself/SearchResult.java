@@ -16,12 +16,15 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.thomasmore.juiceyourself.Controllers.DatabaseController;
 import be.thomasmore.juiceyourself.Controllers.ModelController;
 import be.thomasmore.juiceyourself.Models.Cocktail;
+import be.thomasmore.juiceyourself.Models.CocktailCounter;
 
 public class SearchResult extends AppCompatActivity {
     // members
     ModelController controller;
+    DatabaseController dbc;
 // methods
     ListView listCocktails;
     @Override
@@ -41,6 +44,7 @@ public class SearchResult extends AppCompatActivity {
 
         ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,controller.getSearchResult());
         listCocktails.setAdapter(arrayAdapter);
+
 
     }
 
