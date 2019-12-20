@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.provider.ContactsContract;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import be.thomasmore.juiceyourself.Controllers.DatabaseController;
 import be.thomasmore.juiceyourself.Controllers.ModelController;
 import be.thomasmore.juiceyourself.Models.Categorie;
 import be.thomasmore.juiceyourself.Models.Cocktail;
@@ -28,6 +30,7 @@ import be.thomasmore.juiceyourself.adapters.SpinnerAdapter;
 public class New extends AppCompatActivity {
 
     // members
+    DatabaseController dbc;
     ModelController controller;
     Spinner spinnerGlas;
     Spinner spinnerCategorie;
@@ -44,6 +47,7 @@ public class New extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        dbc = new DatabaseController(this);
         controller = (ModelController) getIntent().getSerializableExtra("ModelController");
         spinnerGlas = (Spinner) findViewById(R.id.spinnerGlas);
         spinnerCategorie = (Spinner) findViewById(R.id.spinnerCategorie);
@@ -84,6 +88,7 @@ public class New extends AppCompatActivity {
         out.setInstructies("");
         out.setThumbnail("");
         out.debugPrint();
+        out.setId(dbc.insertCocktail(out));
         controller.addCocktail(out);
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("ModelController", controller);

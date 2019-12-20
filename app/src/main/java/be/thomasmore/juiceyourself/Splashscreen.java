@@ -10,6 +10,7 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.thomasmore.juiceyourself.Controllers.DatabaseController;
 import be.thomasmore.juiceyourself.Controllers.HttpReader;
 import be.thomasmore.juiceyourself.Controllers.JsonHelper;
 import be.thomasmore.juiceyourself.Controllers.ModelController;
@@ -27,6 +28,7 @@ public class Splashscreen extends AppCompatActivity {
     List<Ingredient> ingredienten;
     List<Cocktail> cocktails = new ArrayList<Cocktail>();
     ModelController controller;
+    DatabaseController dbc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +37,8 @@ public class Splashscreen extends AppCompatActivity {
     }
 
     private void endSplashScreen() {
+        dbc = new DatabaseController(this);
+        cocktails.addAll(dbc.getCocktails());
         controller = new ModelController(glazen, categorieen, ingredienten, cocktails);
 
         Intent i = new Intent (Splashscreen.this, MainActivity.class);

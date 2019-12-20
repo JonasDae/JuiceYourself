@@ -10,11 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.thomasmore.juiceyourself.Counter;
+import be.thomasmore.juiceyourself.Models.Categorie;
 import be.thomasmore.juiceyourself.Models.Cocktail;
 import be.thomasmore.juiceyourself.Models.CocktailCounter;
+import be.thomasmore.juiceyourself.Models.CocktailIngredient;
+import be.thomasmore.juiceyourself.Models.Glas;
+import be.thomasmore.juiceyourself.Models.Ingredient;
 
 public class DatabaseController extends SQLiteOpenHelper {
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 3;
     private static final String DB_NAME = "juiceyourself";
 
     private SQLiteDatabase dbr;
@@ -35,7 +39,7 @@ public class DatabaseController extends SQLiteOpenHelper {
                 "glas TEXT,"+
                 "instructies TEXT,"+
                 "thumb TEXT,"+
-                "alcoholisch BOOL,"+
+                "alcoholisch INTEGER,"+
                 "ingr1 TEXT,"+
                 "ingr2 TEXT,"+
                 "ingr3 TEXT,"+
@@ -117,7 +121,6 @@ public class DatabaseController extends SQLiteOpenHelper {
         SQLiteDatabase db = dbw;
         ContentValues values = new ContentValues();
 
-        values.put("id", c.getId());
         values.put("naam", c.getNaam());
         values.put("categorie", c.getCategorie().getNaam());
         values.put("glas", c.getGlas().getNaam());
@@ -128,7 +131,8 @@ public class DatabaseController extends SQLiteOpenHelper {
             values.put("ingr"+i, "null");
             values.put("measure"+i, "null");
         }
-        for(int i=0;i<c.getIngredienten().size();i++){
+        int i=0;
+        for(i=0;i<c.getIngredienten().size();i++){
             values.put("ingr"+(i+1), c.getIngredienten().get(i).getNaam());
             values.put("measure"+(i+1), c.getIngredienten().get(i).getHoeveelheid());
         }
@@ -178,6 +182,37 @@ public class DatabaseController extends SQLiteOpenHelper {
         }
         cursor.close();
         return counter;
+    }
+    public List<Cocktail> getCocktails() {
+        List<Cocktail> outlist = new ArrayList<Cocktail>();
+        String QUERY_COUNTER_SELECT_ALL = "SELECT * FROM cocktail";
+        SQLiteDatabase db = dbr;
+        Cursor cursor = db.rawQuery(QUERY_COUNTER_SELECT_ALL, null);
+        if(cursor.moveToFirst()) {
+            do{
+                Categorie cat = new Categorie();
+                Glas glas = new Glas();
+                Cocktail c = new Cocktail();
+                c.setId(cursor.getLong(0));
+                c.setNaam(cursor.getString(1));
+                cat.setNaam(cursor.getString(2));
+                c.setCategorie(cat);
+                glas.setNaam(cursor.getString(3));
+                c.setGlas(glas);
+                c.setInstructies(cursor.getString(4));
+                c.setThumbnail(cursor.getString(5));
+                c.setAlcoholisch(cursor.getInt(5)>0);
+                for(int i=0;i<15;i++) {
+                    CocktailIngredient ing = new CocktailIngredient();
+                    ing.setNaam(cursor.getString(6+i));
+                    ing.setHoeveelheid(cursor.getString(21+i));
+                    c.addIngredient(ing);
+                }
+                outlist.add(c);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        return outlist;
     }
     public List<CocktailCounter> getCounters() {
         List<CocktailCounter> outlist = new ArrayList<CocktailCounter>();
