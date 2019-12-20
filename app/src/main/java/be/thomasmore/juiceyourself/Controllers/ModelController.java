@@ -30,6 +30,13 @@ public class ModelController implements Serializable {
         this.ingredienten = ingredienten;
         this.cocktails = cocktails;
     }
+    public Cocktail getCocktailByName(String naam) {
+        for(Cocktail c: cocktails) {
+            if(c.getNaam().equals(naam))
+                return c;
+        }
+        return null;
+    }
     public List<Cocktail> searchCocktails(String regexNaam, String glas, String categorie, String ingredient) {
         int searchFlag = 0;
         if(!glas.equals("Alle"))

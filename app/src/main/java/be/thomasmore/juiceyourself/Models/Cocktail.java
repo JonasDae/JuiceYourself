@@ -17,7 +17,9 @@ public class Cocktail implements Serializable {
     private boolean Alcoholisch;
 
 // methods
-    public Cocktail() {}
+    public Cocktail() {
+        Ingredienten = new ArrayList<>();
+    }
 
     @NonNull
     @Override
@@ -44,6 +46,9 @@ public class Cocktail implements Serializable {
         return false;
     }
 
+    public void addIngredient(CocktailIngredient i) {
+        Ingredienten.add(i);
+    }
     public long getId() {
         return id;
     }

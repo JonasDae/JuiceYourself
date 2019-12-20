@@ -22,12 +22,127 @@
 
     <include layout="@layout/content_new" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintVertical_bias="0.0">
+
+        <TextView
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="100dp"
+            android:id="@+id/welkom"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:textStyle="bold|italic"
+            android:text="@string/new_message"
+            />
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/table1"
+            android:layout_below="@+id/welkom">
+
+            <TableRow android:layout_marginBottom="20dp">
+                <TextView
+                    android:id="@+id/naamCocktail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/search_naam"
+                    android:textStyle="bold"
+                    android:textSize="22dp"/>
+                <EditText
+                    android:layout_marginLeft="30dp"
+                    android:id="@+id/Cocktail"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+            <TableRow android:layout_marginBottom="20dp">
+                <TextView
+                    android:id="@+id/naamGlas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/new_glas"
+                    android:textStyle="bold"
+                    android:textSize="22dp"/>
+                <Spinner
+                    android:id="@+id/spinnerGlas"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="35dp"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+            <TableRow android:layout_marginBottom="20dp">
+                <TextView
+                    android:id="@+id/naamCategorie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/new_categorie"
+                    android:textStyle="bold"
+                    android:textSize="22dp"/>
+                <Spinner
+                    android:id="@+id/spinnerCategorie"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="35dp"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+            <TableRow>
+                <Spinner
+                    android:id="@+id/spinnerIngrediënt"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="35dp"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:layout_marginLeft="30dp"
+                    android:id="@+id/ingredientAmnt"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"/>
+            </TableRow>
+            <TableRow>
+                <Button
+                    android:id="@+id/button_addIngredient"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#AF948F"
+                    android:layout_gravity="center"
+                    android:text="@string/button_adding"
+                    android:onClick="ing_onClick"/>
+            </TableRow>
+            <TableRow>
+                <ListView
+                    android:id="@+id/list"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"/>
+            </TableRow>
+        </TableLayout>
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="120dp"
+            android:layout_below="@+id/table1">
+
+            <TableRow>
+                <Button
+                    android:id="@+id/button_searchResult"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#AF948F"
+                    android:layout_gravity="center"
+                    android:text="@string/button_addfinal"
+                    android:onClick="new_onClick"/>
+            </TableRow>
+        </TableLayout>
+    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

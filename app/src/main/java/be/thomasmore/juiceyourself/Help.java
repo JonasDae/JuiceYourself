@@ -9,32 +9,32 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import be.thomasmore.juiceyourself.Controllers.ModelController;
 
-public class Hulp extends AppCompatActivity {
+public class Help extends AppCompatActivity {
 
     // members
     ModelController controller;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        controller = (ModelController) getIntent().getSerializableExtra("ModelController");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hulp);
+        setContentView(R.layout.activity_help);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        controller = (ModelController) getIntent().getSerializableExtra("ModelController");
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -96,5 +96,4 @@ public class Hulp extends AppCompatActivity {
         intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
-
 }
