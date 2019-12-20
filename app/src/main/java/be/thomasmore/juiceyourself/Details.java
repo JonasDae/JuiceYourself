@@ -9,6 +9,7 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -44,6 +45,13 @@ public class Details extends AppCompatActivity {
         textGlas.setText(controller.getDetailCocktail().getGlas().getNaam());
         textAlcoholisch.setText(String.valueOf(controller.getDetailCocktail().isAlcoholisch()));
         textInstructies.setText(controller.getDetailCocktail().getInstructies());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
     }
 
     @Override
