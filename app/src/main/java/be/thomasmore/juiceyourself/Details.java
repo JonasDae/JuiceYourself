@@ -12,9 +12,11 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import be.thomasmore.juiceyourself.Controllers.ModelController;
+import be.thomasmore.juiceyourself.adapters.IngredientListAdapter;
 
 public class Details extends AppCompatActivity {
 // members
@@ -24,6 +26,7 @@ public class Details extends AppCompatActivity {
     TextView textGlas;
     TextView textAlcoholisch;
     TextView textInstructies;
+    ListView list;
 // methods
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,12 +42,15 @@ public class Details extends AppCompatActivity {
         textGlas =(TextView)findViewById(R.id.cocktail_glas);
         textAlcoholisch =(TextView)findViewById(R.id.cocktail_alcoholisch);
         textInstructies =(TextView)findViewById(R.id.cocktail_instructies);
+        list = (ListView) findViewById(R.id.list);
 
         textNaam.setText(controller.getDetailCocktail().getNaam());
         textCategorie.setText(controller.getDetailCocktail().getCategorie().getNaam());
         textGlas.setText(controller.getDetailCocktail().getGlas().getNaam());
         textAlcoholisch.setText(String.valueOf(controller.getDetailCocktail().isAlcoholisch()));
         textInstructies.setText(controller.getDetailCocktail().getInstructies());
+        IngredientListAdapter adapterList = new IngredientListAdapter(getApplicationContext(),controller.getDetailCocktail().getIngredienten());
+        list.setAdapter(adapterList);
     }
 
     @Override
