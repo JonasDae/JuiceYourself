@@ -12,6 +12,11 @@ import java.util.List;
 import be.thomasmore.juiceyourself.Models.CocktailCounter;
 import be.thomasmore.juiceyourself.R;
 
+/*
+Adapter specifiek voor de top 10, met cocktailnaam en hoeveelheid.
+UI element in res/layout/toplist_item.xml
+*/
+
 public class ToplistAdapter extends BaseAdapter {
 // members
     Context context;

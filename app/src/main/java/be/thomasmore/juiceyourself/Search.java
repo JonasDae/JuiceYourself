@@ -41,12 +41,12 @@ public class Search extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         controller = (ModelController) getIntent().getSerializableExtra("ModelController");
-
+// UI elementen alias
         spinnerGlas = (Spinner) findViewById(R.id.spinnerGlas);
         spinnerCategorie = (Spinner) findViewById(R.id.spinnerCategorie);
         spinnerIngredient = (Spinner) findViewById(R.id.spinnerIngrediënt);
         textNaam = (TextView) findViewById(R.id.Cocktail) ;
-
+// zie adapters, weer van t zelfde
         SpinnerAdapter adapterGlas = new SpinnerAdapter(getApplicationContext(),controller.getGlazenValues());
         spinnerGlas.setAdapter(adapterGlas);
         SpinnerAdapter adapterCategorie = new SpinnerAdapter(getApplicationContext(),controller.getCategorieenValues());

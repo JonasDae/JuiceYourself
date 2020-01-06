@@ -36,9 +36,9 @@ public class Highscore extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         controller = (ModelController) getIntent().getSerializableExtra("ModelController");
         dbc = new DatabaseController(this);
+// rechtstreeks top 10 ophalen van DB en in lijst zetten, zie adapter
         this.top = dbc.getTop();
         for(CocktailCounter c: top) {
             c.setCocktailNaam(controller.getCocktailById(c.getCocktailId()).getNaam());

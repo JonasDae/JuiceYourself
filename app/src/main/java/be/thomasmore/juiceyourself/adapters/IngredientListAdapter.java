@@ -13,6 +13,12 @@ import be.thomasmore.juiceyourself.Models.CocktailCounter;
 import be.thomasmore.juiceyourself.Models.CocktailIngredient;
 import be.thomasmore.juiceyourself.R;
 
+
+/*
+Adapter specifiek voor ingredienten, geeft namen en hoeveelheden en zet deze in lijst.
+Lijst UI is te vinden in res/layout/ingrlist_item.xml
+*/
+
 public class IngredientListAdapter extends BaseAdapter {
 // members
     Context context;

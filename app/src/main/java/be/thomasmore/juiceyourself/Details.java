@@ -36,14 +36,14 @@ public class Details extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         controller = (ModelController) getIntent().getSerializableExtra("ModelController");
-
+// aliasen voor alle UI componenten da we nodig hebben
         textNaam =(TextView)findViewById(R.id.cocktail_naam);
         textCategorie =(TextView)findViewById(R.id.cocktail_categorie);
         textGlas =(TextView)findViewById(R.id.cocktail_glas);
         textAlcoholisch =(TextView)findViewById(R.id.cocktail_alcoholisch);
         textInstructies =(TextView)findViewById(R.id.cocktail_instructies);
         list = (ListView) findViewById(R.id.list);
-
+// lijsten opvullen, zie adapter
         textNaam.setText(controller.getDetailCocktail().getNaam());
         textCategorie.setText(controller.getDetailCocktail().getCategorie().getNaam());
         textGlas.setText(controller.getDetailCocktail().getGlas().getNaam());

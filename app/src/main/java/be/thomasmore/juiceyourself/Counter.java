@@ -38,15 +38,16 @@ public class Counter extends AppCompatActivity {
         setContentView(R.layout.activity_counter);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+// standaard controller ophalen
         controller = (ModelController) getIntent().getSerializableExtra("ModelController");
+// lokale database nodig voor weg te schrijve
         dbc = new DatabaseController(this);
-
+// dees zijn die spinners, zie adapter
         spinnerCocktail = (Spinner) findViewById(R.id.spinnerCocktail);
         SpinnerAdapter adapterCocktail = new SpinnerAdapter(getApplicationContext(), controller.getCocktailValues());
         spinnerCocktail.setAdapter(adapterCocktail);
     }
-
+// counter incrementere in lokale db
     public void JUICE_UP_BRO(View v) {
         cocktail = controller.getCocktailByName((String)spinnerCocktail.getSelectedItem());
         counter = dbc.getCounterByCocktail(cocktail.getId());

@@ -41,10 +41,10 @@ public class SearchResult extends AppCompatActivity {
         controller = (ModelController) getIntent().getSerializableExtra("ModelController");
 
         listCocktails=(ListView)findViewById(R.id.list_cocktails);
-
+// standaard adapter hier, zet array gewoon om in lijstelementen
         ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1,controller.getSearchResult());
         listCocktails.setAdapter(arrayAdapter);
-
+// om details te kunnen kijken
         listCocktails.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

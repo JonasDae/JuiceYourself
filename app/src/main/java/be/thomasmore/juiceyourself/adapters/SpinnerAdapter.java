@@ -12,6 +12,11 @@ import org.w3c.dom.Text;
 
 import be.thomasmore.juiceyourself.R;
 
+/*
+Vrij algemene spinneradapter, geeft gewoon een text waarde weer.
+UI component in res/layout/spinner_item.xml
+*/
+
 public class SpinnerAdapter extends BaseAdapter {
 // members
     Context context;

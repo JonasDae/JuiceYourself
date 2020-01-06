@@ -48,8 +48,10 @@ public class New extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+// lokale DB nodig
         dbc = new DatabaseController(this);
         controller = (ModelController) getIntent().getSerializableExtra("ModelController");
+// alias voor UI elementen
         spinnerGlas = (Spinner) findViewById(R.id.spinnerGlas);
         spinnerCategorie = (Spinner) findViewById(R.id.spinnerCategorie);
         spinnerIngredient = (Spinner) findViewById(R.id.spinnerIngrediënt);
@@ -57,7 +59,7 @@ public class New extends AppCompatActivity {
         Instructies= (EditText) findViewById(R.id.text_instructies) ;
         ingredientAmnt = (EditText) findViewById(R.id.ingredientAmnt) ;
         list = (ListView) findViewById(R.id.list);
-
+// spinners en lijsten opvullen, zie adapters
         SpinnerAdapter adapterGlas = new SpinnerAdapter(getApplicationContext(),controller.getGlazenValues());
         spinnerGlas.setAdapter(adapterGlas);
         SpinnerAdapter adapterCategorie = new SpinnerAdapter(getApplicationContext(),controller.getCategorieenValues());
@@ -91,12 +93,14 @@ public class New extends AppCompatActivity {
         out.setThumbnail("");
         out.debugPrint();
         out.setId(dbc.insertCocktail(out));
+// toevoegen aan lokale DB
         controller.addCocktail(out);
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
     public void ing_onClick(View v) {
+// ingredient lijst bijvullen, zie adapter
         CocktailIngredient i = new CocktailIngredient();
         i.setHoeveelheid(ingredientAmnt.getText().toString());
         i.setNaam(spinnerIngredient.getSelectedItem().toString());

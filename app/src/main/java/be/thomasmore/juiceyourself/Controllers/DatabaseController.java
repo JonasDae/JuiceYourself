@@ -17,6 +17,12 @@ import be.thomasmore.juiceyourself.Models.CocktailIngredient;
 import be.thomasmore.juiceyourself.Models.Glas;
 import be.thomasmore.juiceyourself.Models.Ingredient;
 
+/*
+Controller voor de lokale database.
+Zit ni veel interessants in, gewoon CRUDs feitelijk.
+Aparte functie voor top 10 want da was gemakkelijk
+*/
+
 public class DatabaseController extends SQLiteOpenHelper {
     private static final int DB_VERSION = 3;
     private static final String DB_NAME = "juiceyourself";

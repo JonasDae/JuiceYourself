@@ -21,6 +21,7 @@ public class Hulp extends AppCompatActivity {
     ModelController controller;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+// controller word hier ni gebruikt maar we moeten die terug door kunnen geven, daarmee
         controller = (ModelController) getIntent().getSerializableExtra("ModelController");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hulp);

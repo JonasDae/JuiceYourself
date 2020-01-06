@@ -33,14 +33,16 @@ public class Splashscreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
+// een voor een alle gets oproepen, soort van recursief
         this.getAPIGlazen();
     }
 
     private void endSplashScreen() {
+// dbc is voor lokale database, moet ni doorgegeve worde naar intent want da word apart opgeslage
         dbc = new DatabaseController(this);
         cocktails.addAll(dbc.getCocktails());
+// controller in intent stoppen en door naar main
         controller = new ModelController(glazen, categorieen, ingredienten, cocktails);
-
         Intent i = new Intent (Splashscreen.this, MainActivity.class);
         i.putExtra("ModelController", controller);
         startActivity(i);
@@ -54,6 +56,7 @@ public class Splashscreen extends AppCompatActivity {
             public void resultReady(String result) {
                 JsonHelper helper = new JsonHelper();
                 glazen = helper.getGlazen(result);
+// op naar de volgende
                 getAPICategorieen();
             }
         });
@@ -66,6 +69,7 @@ public class Splashscreen extends AppCompatActivity {
             public void resultReady(String result) {
                 JsonHelper helper = new JsonHelper();
                 categorieen = helper.getCategorien(result);
+// nog veel te gaan
                 getAPIIngredienten();
             }
         });
@@ -80,6 +84,7 @@ public class Splashscreen extends AppCompatActivity {
                 ingredienten  = helper.getIngredienten(result);
 // API kan niet alles in 1 keer ophalen
                 for(char c = 'a'; c <= 'z';c++) {
+// nog 26 te gaan :D
                     getAPICocktails(c);
                 }
             }
@@ -96,6 +101,7 @@ public class Splashscreen extends AppCompatActivity {
                 Cocktail last = cocktails.get(cocktails.size() - 1);
 // @docent: gelieve de volgende 3 lijnen over te slagen bij het nakijken, dankuwel
                 if (last.getNaam().toLowerCase().charAt(0) == 'z') {
+// en klaar
                     endSplashScreen();
                 }
             }

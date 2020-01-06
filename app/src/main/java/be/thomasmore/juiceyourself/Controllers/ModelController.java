@@ -15,6 +15,13 @@ import be.thomasmore.juiceyourself.Models.CocktailCounter;
 import be.thomasmore.juiceyourself.Models.Glas;
 import be.thomasmore.juiceyourself.Models.Ingredient;
 
+/*
+Alle data word hierin opgeslage en naar alle activities doorgegeven
+zou feitelijk statisch kunnen zijn om het gemakkelijk te maken maar meh
+Ziet ook zeker naar mijn schone zoekfunctie
+Rest is gewoon CRUD
+*/
+
 public class ModelController implements Serializable {
     // members
     List<Glas> glazen;
@@ -31,6 +38,7 @@ public class ModelController implements Serializable {
         this.categorieen = categorieen;
         this.ingredienten = ingredienten;
         this.cocktails = cocktails;
+// sorteren alphabetisch
         Collections.sort(this.glazen, new Comparator<Glas>() {
             @Override
             public int compare(Glas o1, Glas o2) {
@@ -64,6 +72,10 @@ public class ModelController implements Serializable {
         return null;
     }
     public List<Cocktail> searchCocktails(String regexNaam, String glas, String categorie, String ingredient) {
+/*
+mijn schone zoekfunctie :)
+bitwise zwarte magie enzo
+*/
         int searchFlag = 0;
         if(!glas.equals("Alle"))
             searchFlag |= 1;
@@ -83,7 +95,6 @@ public class ModelController implements Serializable {
                 matches |= 2;
             if(cocktail.checkIngredient(ingredient))
                 matches |= 4;
-
             if(matches == searchFlag)
                 outlist.add(cocktail);
         }
@@ -127,7 +138,7 @@ public class ModelController implements Serializable {
     public List<Cocktail> getCocktails() {
         return cocktails;
     }
-
+// eerste waarde van spinners op "Alle" zette, vooral voor zoeken en das gemakkelijk om da te late staan voor details en nieuw
     public String[] getGlazenValues() {
         String[] out = new String[glazen.size()+1];
         out[0] = "Alle";
