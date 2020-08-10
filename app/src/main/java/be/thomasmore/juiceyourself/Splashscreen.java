@@ -39,12 +39,11 @@ public class Splashscreen extends AppCompatActivity {
 
     private void endSplashScreen() {
 // dbc is voor lokale database, moet ni doorgegeve worde naar intent want da word apart opgeslage
-        dbc = new DatabaseController(this);
+        dbc = DatabaseController.getInstance(this);
         cocktails.addAll(dbc.getCocktails());
 // controller in intent stoppen en door naar main
-        controller = new ModelController(glazen, categorieen, ingredienten, cocktails);
+        controller = ModelController.getInstance(glazen, categorieen, ingredienten, cocktails);
         Intent i = new Intent (Splashscreen.this, MainActivity.class);
-        i.putExtra("ModelController", controller);
         startActivity(i);
         finish();
     }

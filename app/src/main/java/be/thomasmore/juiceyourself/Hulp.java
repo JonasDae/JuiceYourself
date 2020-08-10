@@ -17,12 +17,8 @@ import be.thomasmore.juiceyourself.Controllers.ModelController;
 
 public class Hulp extends AppCompatActivity {
 
-    // members
-    ModelController controller;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-// controller word hier ni gebruikt maar we moeten die terug door kunnen geven, daarmee
-        controller = (ModelController) getIntent().getSerializableExtra("ModelController");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hulp);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -65,37 +61,31 @@ public class Hulp extends AppCompatActivity {
     //Menu views
     public void home_onClick() {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void search_onClick() {
         Intent intent = new Intent(this, Search.class);
-        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void add_onClick() {
         Intent intent = new Intent(this, New.class);
-        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void top_onClick() {
         Intent intent = new Intent(this, Highscore.class);
-        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void counter_onClick() {
         Intent intent = new Intent(this, Counter.class);
-        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void hulp_onClick() {
         Intent intent = new Intent(this, Hulp.class);
-        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 

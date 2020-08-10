@@ -40,7 +40,7 @@ public class Search extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        controller = (ModelController) getIntent().getSerializableExtra("ModelController");
+        controller = ModelController.getInstance(null, null, null, null);
 // UI elementen alias
         spinnerGlas = (Spinner) findViewById(R.id.spinnerGlas);
         spinnerCategorie = (Spinner) findViewById(R.id.spinnerCategorie);
@@ -104,7 +104,6 @@ public class Search extends AppCompatActivity {
         controller.searchCocktails(regexNaam, glas, categorie, ingredient);
 
         Intent intent = new Intent(this, SearchResult.class);
-        intent.putExtra("ModelController", controller);
         startActivity(intent);
 
 
@@ -113,31 +112,26 @@ public class Search extends AppCompatActivity {
     //Menu views
     public void home_onClick() {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void search_onClick() {
         Intent intent = new Intent(this, Search.class);
-        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void add_onClick() {
         Intent intent = new Intent(this, New.class);
-        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void top_onClick() {
         Intent intent = new Intent(this, Highscore.class);
-        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void counter_onClick() {
         Intent intent = new Intent(this, Counter.class);
-        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 }

@@ -36,8 +36,8 @@ public class Highscore extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        controller = (ModelController) getIntent().getSerializableExtra("ModelController");
-        dbc = new DatabaseController(this);
+        controller = ModelController.getInstance(null, null, null, null);
+        dbc = DatabaseController.getInstance(this);
 // rechtstreeks top 10 ophalen van DB en in lijst zetten, zie adapter
         this.top = dbc.getTop();
         for(CocktailCounter c: top) {
@@ -84,37 +84,31 @@ public class Highscore extends AppCompatActivity {
     //Menu views
     public void home_onClick() {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void search_onClick() {
         Intent intent = new Intent(this, Search.class);
-        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void add_onClick() {
         Intent intent = new Intent(this, New.class);
-        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void top_onClick() {
         Intent intent = new Intent(this, Highscore.class);
-        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void counter_onClick() {
         Intent intent = new Intent(this, Counter.class);
-        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 
     public void hulp_onClick() {
         Intent intent = new Intent(this, Hulp.class);
-        intent.putExtra("ModelController", controller);
         startActivity(intent);
     }
 }

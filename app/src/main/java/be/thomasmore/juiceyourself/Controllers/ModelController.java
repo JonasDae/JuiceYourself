@@ -22,18 +22,28 @@ Ziet ook zeker naar mijn schone zoekfunctie
 Rest is gewoon CRUD
 */
 
-public class ModelController implements Serializable {
+public class ModelController {
     // members
-    List<Glas> glazen;
-    List<Categorie> categorieen;
-    List<Ingredient> ingredienten;
-    List<Cocktail> cocktails;
+    private List<Glas> glazen;
+    private List<Categorie> categorieen;
+    private List<Ingredient> ingredienten;
+    private List<Cocktail> cocktails;
 
-    List<Cocktail> searchResult;
-    Cocktail detailCocktail;
+    private List<Cocktail> searchResult;
+    private Cocktail detailCocktail;
+
+    // singleton patroon
+    private static ModelController instance;
+
 
     // methods
-    public ModelController(List<Glas> glazen, List<Categorie> categorieen, List<Ingredient> ingredienten, List<Cocktail> cocktails) {
+    public static synchronized ModelController getInstance(List<Glas> glazen, List<Categorie> categorieen, List<Ingredient> ingredienten, List<Cocktail> cocktails) {
+        if(instance == null) {
+            instance = new ModelController(glazen, categorieen, ingredienten, cocktails);
+        }
+        return instance;
+    }
+    private ModelController(List<Glas> glazen, List<Categorie> categorieen, List<Ingredient> ingredienten, List<Cocktail> cocktails) {
         this.glazen = glazen;
         this.categorieen = categorieen;
         this.ingredienten = ingredienten;
@@ -135,9 +145,6 @@ bitwise zwarte magie enzo
         return ingredienten;
     }
 
-    public List<Cocktail> getCocktails() {
-        return cocktails;
-    }
 // eerste waarde van spinners op "Alle" zette, vooral voor zoeken en das gemakkelijk om da te late staan voor details en nieuw
     public String[] getGlazenValues() {
         String[] out = new String[glazen.size()+1];
@@ -165,10 +172,8 @@ bitwise zwarte magie enzo
         return out;
     }
     public String[] getCocktailValues() {
-        String[] out = new String[cocktails.size()];
-        for (int i = 0; i < cocktails.size(); i++) {
-            out[i] = cocktails.get(i).getNaam();
-        }
+//        return dbc.getCocktailValues();
+        String[] out = {"test"};
         return out;
     }
 }

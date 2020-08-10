@@ -26,16 +26,25 @@ Aparte functie voor top 10 want da was gemakkelijk
 public class DatabaseController extends SQLiteOpenHelper {
     private static final int DB_VERSION = 3;
     private static final String DB_NAME = "juiceyourself";
+// singleton patroon
+    private static DatabaseController instance;
 
     private SQLiteDatabase dbr;
     private SQLiteDatabase dbw;
-
-    public DatabaseController(Context context) {
+// private voor singleton
+    private DatabaseController(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         dbr = this.getReadableDatabase();
         dbw = this.getWritableDatabase();
     }
-
+// singleton
+    public static synchronized DatabaseController getInstance(Context c)
+    {
+        if(instance == null){
+            instance = new DatabaseController((c.getApplicationContext()));
+        }
+        return instance;
+    }
     @Override
     public void onCreate(SQLiteDatabase db) {
         String QUERY_COCKTAIL_CREATE = "CREATE TABLE cocktail (" +
@@ -219,6 +228,22 @@ public class DatabaseController extends SQLiteOpenHelper {
         }
         cursor.close();
         return outlist;
+    }
+// alleen de namen voor de spinners op te vullen
+    public String[] getCocktailValues () {
+        List<String> list = new ArrayList<String>();
+        String QUERY_COUNTER_SELECT_ALL = "SELECT * FROM cocktail";
+        SQLiteDatabase db = dbr;
+        Cursor cursor = db.rawQuery(QUERY_COUNTER_SELECT_ALL, null);
+        if(cursor.moveToFirst()) {
+            do{
+                list.add(cursor.getString(1));
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        String[] out = new String[list.size()];
+        list.toArray(out);
+        return out;
     }
     public List<CocktailCounter> getCounters() {
         List<CocktailCounter> outlist = new ArrayList<CocktailCounter>();
