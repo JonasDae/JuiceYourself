@@ -22,14 +22,11 @@ import be.thomasmore.juiceyourself.Models.Glas;
 import be.thomasmore.juiceyourself.Models.Ingredient;
 
 public class MainActivity extends AppCompatActivity {
-// members
-    ModelController controller;
     // methods
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        controller = ModelController.getInstance(null, null, null, null);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

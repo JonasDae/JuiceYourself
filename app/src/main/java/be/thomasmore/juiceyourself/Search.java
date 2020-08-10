@@ -24,13 +24,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.thomasmore.juiceyourself.Controllers.HttpReader;
+import be.thomasmore.juiceyourself.Controllers.JsonHelper;
 import be.thomasmore.juiceyourself.Controllers.ModelController;
 import be.thomasmore.juiceyourself.Models.Cocktail;
 import be.thomasmore.juiceyourself.adapters.SpinnerAdapter;
 
 public class Search extends AppCompatActivity {
 
-    ModelController controller;
     Spinner spinnerGlas;
     Spinner spinnerCategorie;
     Spinner spinnerIngredient;
@@ -40,28 +41,65 @@ public class Search extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        controller = ModelController.getInstance(null, null, null, null);
 // UI elementen alias
         spinnerGlas = (Spinner) findViewById(R.id.spinnerGlas);
         spinnerCategorie = (Spinner) findViewById(R.id.spinnerCategorie);
         spinnerIngredient = (Spinner) findViewById(R.id.spinnerIngrediënt);
         textNaam = (TextView) findViewById(R.id.Cocktail) ;
-// zie adapters, weer van t zelfde
-        SpinnerAdapter adapterGlas = new SpinnerAdapter(getApplicationContext(),controller.getGlazenValues());
-        spinnerGlas.setAdapter(adapterGlas);
-        SpinnerAdapter adapterCategorie = new SpinnerAdapter(getApplicationContext(),controller.getCategorieenValues());
-        spinnerCategorie.setAdapter(adapterCategorie);
-        SpinnerAdapter adapterIngredient = new SpinnerAdapter(getApplicationContext(),controller.getIngredientValues());
-        spinnerIngredient.setAdapter(adapterIngredient);
+        fillCategorieSpinner();
+        fillGlasSpinner();
+        fillIngredientSpinner();
 
 // options menu
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
+    // spinners en lijsten opvullen met adapters
+    public void fillGlasSpinner()
+    {
+        HttpReader reader = new HttpReader();
+        reader.setOnResultReadyListener(new HttpReader.OnResultReadyListener() {
+            @Override
+            public void resultReady(String result) {
+                JsonHelper helper = new JsonHelper();
+                String[] glazen = helper.getGlazenNamen(result);
+                SpinnerAdapter adapterGlas = new SpinnerAdapter(getApplicationContext(),glazen);
+                spinnerGlas.setAdapter(adapterGlas);
+            }
+        });
+        reader.execute("https://www.thecocktaildb.com/api/json/v1/1/list.php?g=list");
+    }
+    public void fillCategorieSpinner()
+    {
+        HttpReader reader = new HttpReader();
+        reader.setOnResultReadyListener(new HttpReader.OnResultReadyListener() {
+            @Override
+            public void resultReady(String result) {
+                JsonHelper helper = new JsonHelper();
+                String[] categorieen = helper.getCategorieNamen(result);
+                SpinnerAdapter adapterCategorie = new SpinnerAdapter(getApplicationContext(),categorieen);
+                spinnerCategorie.setAdapter(adapterCategorie);
+            }
+        });
+        reader.execute("https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list");
 
+    }
+    public void fillIngredientSpinner()
+    {
+        HttpReader reader = new HttpReader();
+        reader.setOnResultReadyListener(new HttpReader.OnResultReadyListener() {
+            @Override
+            public void resultReady(String result) {
+                JsonHelper helper = new JsonHelper();
+                String[] ingredienten = helper.getIngredientNamen(result);
+                SpinnerAdapter adapterIngredient = new SpinnerAdapter(getApplicationContext(),ingredienten);
+                spinnerIngredient.setAdapter(adapterIngredient);
+            }
+        });
+        reader.execute("https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list");
 
-
+    }
 
 // options menu hieronder
     @Override
@@ -96,14 +134,16 @@ public class Search extends AppCompatActivity {
     public void searchResult_onClick(View v) {
 
         String regexNaam = (String) textNaam.getText().toString();
-        String glas = (String) spinnerGlas.getSelectedItem();
-        String categorie = (String) spinnerCategorie.getSelectedItem();
-        String ingredient = (String) spinnerIngredient.getSelectedItem();
-// zoekresultaten worden opgeslagen in controller zelf
-// intent vind arraylists niet leuk, daarmee
-        controller.searchCocktails(regexNaam, glas, categorie, ingredient);
+        String glasstr = (String) spinnerGlas.getSelectedItem();
+        String categoriestr = (String) spinnerCategorie.getSelectedItem();
+        String ingredientstr = (String) spinnerIngredient.getSelectedItem();
 
         Intent intent = new Intent(this, SearchResult.class);
+        intent.putExtra("regexNaam", regexNaam);
+        intent.putExtra("glasstr", glasstr);
+        intent.putExtra("categoriestr", categoriestr);
+        intent.putExtra("ingredientstr", ingredientstr);
+
         startActivity(intent);
 
 

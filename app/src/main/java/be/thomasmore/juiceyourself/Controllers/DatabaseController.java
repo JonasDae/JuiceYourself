@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -200,9 +201,54 @@ public class DatabaseController extends SQLiteOpenHelper {
     }
     public List<Cocktail> getCocktails() {
         List<Cocktail> outlist = new ArrayList<Cocktail>();
-        String QUERY_COUNTER_SELECT_ALL = "SELECT * FROM cocktail";
+        String QUERY_COCKTAIL_SELECT_ALL = "SELECT * FROM cocktail";
         SQLiteDatabase db = dbr;
-        Cursor cursor = db.rawQuery(QUERY_COUNTER_SELECT_ALL, null);
+        Cursor cursor = db.rawQuery(QUERY_COCKTAIL_SELECT_ALL, null);
+        if(cursor.moveToFirst()) {
+            do{
+                Categorie cat = new Categorie();
+                Glas glas = new Glas();
+                Cocktail c = new Cocktail();
+                c.setId(cursor.getLong(0));
+                c.setNaam(cursor.getString(1));
+                cat.setNaam(cursor.getString(2));
+                c.setCategorie(cat);
+                glas.setNaam(cursor.getString(3));
+                c.setGlas(glas);
+                c.setInstructies(cursor.getString(4));
+                c.setThumbnail(cursor.getString(5));
+                c.setAlcoholisch(cursor.getInt(5)>0);
+                for(int i=0;i<15;i++) {
+                    CocktailIngredient ing = new CocktailIngredient();
+                    ing.setNaam(cursor.getString(6+i));
+                    ing.setHoeveelheid(cursor.getString(21+i));
+                    c.addIngredient(ing);
+                }
+                outlist.add(c);
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        return outlist;
+    }
+    public List<Cocktail> searchCocktail(String regexNaam, String glasstr, String categoriestr, String ingredientstr) {
+        List<Cocktail> outlist = new ArrayList<Cocktail>();
+        String QUERY_COCKTAIL_SEARCH = "SELECT * FROM cocktail WHERE naam LIKE '*" + regexNaam + "*'";
+
+        if(!glasstr.equals("Alle"))
+            QUERY_COCKTAIL_SEARCH += " Glas LIKE '" + glasstr + "' AND ";
+        if(!categoriestr.equals("Alle"))
+            QUERY_COCKTAIL_SEARCH += " Categorie LIKE '" + categoriestr + "' AND";
+
+        if(!ingredientstr.equals("Alle"))
+        {
+            QUERY_COCKTAIL_SEARCH += " AND ( Ingredient1 LIKE '" + ingredientstr + "'";
+            for(int i=1;i<16;i++)
+                QUERY_COCKTAIL_SEARCH += " OR Ingredient"+ i +" LIKE '" + ingredientstr + "'";
+            QUERY_COCKTAIL_SEARCH += ")";
+        }
+
+        SQLiteDatabase db = dbr;
+        Cursor cursor = db.rawQuery(QUERY_COCKTAIL_SEARCH, null);
         if(cursor.moveToFirst()) {
             do{
                 Categorie cat = new Categorie();

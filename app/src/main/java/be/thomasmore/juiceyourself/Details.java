@@ -16,11 +16,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import be.thomasmore.juiceyourself.Controllers.ModelController;
+import be.thomasmore.juiceyourself.Models.Cocktail;
 import be.thomasmore.juiceyourself.adapters.IngredientListAdapter;
 
 public class Details extends AppCompatActivity {
 // members
-    ModelController controller;
+    Cocktail detailCocktail;
     TextView textNaam;
     TextView textCategorie;
     TextView textGlas;
@@ -34,8 +35,8 @@ public class Details extends AppCompatActivity {
         setContentView(R.layout.activity_details);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        detailCocktail = (Cocktail) getIntent().getSerializableExtra("detailCocktail");
 
-        controller = ModelController.getInstance(null, null, null, null);
 // aliasen voor alle UI componenten da we nodig hebben
         textNaam =(TextView)findViewById(R.id.cocktail_naam);
         textCategorie =(TextView)findViewById(R.id.cocktail_categorie);
@@ -44,12 +45,12 @@ public class Details extends AppCompatActivity {
         textInstructies =(TextView)findViewById(R.id.cocktail_instructies);
         list = (ListView) findViewById(R.id.list);
 // lijsten opvullen, zie adapter
-        textNaam.setText(controller.getDetailCocktail().getNaam());
-        textCategorie.setText(controller.getDetailCocktail().getCategorie().getNaam());
-        textGlas.setText(controller.getDetailCocktail().getGlas().getNaam());
-        textAlcoholisch.setText(String.valueOf(controller.getDetailCocktail().isAlcoholisch()));
-        textInstructies.setText(controller.getDetailCocktail().getInstructies());
-        IngredientListAdapter adapterList = new IngredientListAdapter(getApplicationContext(),controller.getDetailCocktail().getIngredienten());
+        textNaam.setText(detailCocktail.getNaam());
+        textCategorie.setText(detailCocktail.getCategorie().getNaam());
+        textGlas.setText(detailCocktail.getGlas().getNaam());
+        textAlcoholisch.setText(String.valueOf(detailCocktail.isAlcoholisch()));
+        textInstructies.setText(detailCocktail.getInstructies());
+        IngredientListAdapter adapterList = new IngredientListAdapter(getApplicationContext(),detailCocktail.getIngredienten());
         list.setAdapter(adapterList);
     }
 

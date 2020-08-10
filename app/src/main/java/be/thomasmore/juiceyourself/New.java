@@ -19,6 +19,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import be.thomasmore.juiceyourself.Controllers.DatabaseController;
+import be.thomasmore.juiceyourself.Controllers.HttpReader;
+import be.thomasmore.juiceyourself.Controllers.JsonHelper;
 import be.thomasmore.juiceyourself.Controllers.ModelController;
 import be.thomasmore.juiceyourself.Models.Categorie;
 import be.thomasmore.juiceyourself.Models.Cocktail;
@@ -31,7 +33,6 @@ public class New extends AppCompatActivity {
 
     // members
     DatabaseController dbc;
-    ModelController controller;
     Spinner spinnerGlas;
     Spinner spinnerCategorie;
     Spinner spinnerIngredient;
@@ -50,7 +51,6 @@ public class New extends AppCompatActivity {
 
 // lokale DB nodig
         dbc = DatabaseController.getInstance(this);
-        controller = ModelController.getInstance(null,null,null,null);
 // alias voor UI elementen
         spinnerGlas = (Spinner) findViewById(R.id.spinnerGlas);
         spinnerCategorie = (Spinner) findViewById(R.id.spinnerCategorie);
@@ -60,16 +60,57 @@ public class New extends AppCompatActivity {
         ingredientAmnt = (EditText) findViewById(R.id.ingredientAmnt) ;
         list = (ListView) findViewById(R.id.list);
 // spinners en lijsten opvullen, zie adapters
-        SpinnerAdapter adapterGlas = new SpinnerAdapter(getApplicationContext(),controller.getGlazenValues());
-        spinnerGlas.setAdapter(adapterGlas);
-        SpinnerAdapter adapterCategorie = new SpinnerAdapter(getApplicationContext(),controller.getCategorieenValues());
-        spinnerCategorie.setAdapter(adapterCategorie);
-        SpinnerAdapter adapterIngredient = new SpinnerAdapter(getApplicationContext(),controller.getIngredientValues());
-        spinnerIngredient.setAdapter(adapterIngredient);
+        fillGlasSpinner();
+        fillCategorieSpinner();
+        fillIngredientSpinner();
         IngredientListAdapter adapterList = new IngredientListAdapter(getApplicationContext(),out.getIngredienten());
         list.setAdapter(adapterList);
     }
+// spinners en lijsten opvullen met adapters
+    public void fillGlasSpinner()
+    {
+        HttpReader reader = new HttpReader();
+        reader.setOnResultReadyListener(new HttpReader.OnResultReadyListener() {
+            @Override
+            public void resultReady(String result) {
+                JsonHelper helper = new JsonHelper();
+                String[] glazen = helper.getGlazenNamen(result);
+                SpinnerAdapter adapterGlas = new SpinnerAdapter(getApplicationContext(),glazen);
+                spinnerGlas.setAdapter(adapterGlas);
+            }
+        });
+        reader.execute("https://www.thecocktaildb.com/api/json/v1/1/list.php?g=list");
+    }
+    public void fillCategorieSpinner()
+    {
+        HttpReader reader = new HttpReader();
+        reader.setOnResultReadyListener(new HttpReader.OnResultReadyListener() {
+            @Override
+            public void resultReady(String result) {
+                JsonHelper helper = new JsonHelper();
+                String[] categorieen = helper.getCategorieNamen(result);
+                SpinnerAdapter adapterCategorie = new SpinnerAdapter(getApplicationContext(),categorieen);
+                spinnerCategorie.setAdapter(adapterCategorie);
+            }
+        });
+        reader.execute("https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list");
 
+    }
+    public void fillIngredientSpinner()
+    {
+        HttpReader reader = new HttpReader();
+        reader.setOnResultReadyListener(new HttpReader.OnResultReadyListener() {
+            @Override
+            public void resultReady(String result) {
+                JsonHelper helper = new JsonHelper();
+                String[] ingredienten = helper.getIngredientNamen(result);
+                SpinnerAdapter adapterIngredient = new SpinnerAdapter(getApplicationContext(),ingredienten);
+                spinnerIngredient.setAdapter(adapterIngredient);
+            }
+        });
+        reader.execute("https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list");
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -82,6 +123,7 @@ public class New extends AppCompatActivity {
         cat.setNaam(spinnerCategorie.getSelectedItem().toString());
         Glas glas = new Glas();
         glas.setNaam(spinnerGlas.getSelectedItem().toString());
+// placeholder: word correct weggeschreven
         out.setId(1234567890);
 
         out.setNaam(textNaam.getText().toString());
@@ -94,7 +136,7 @@ public class New extends AppCompatActivity {
         out.debugPrint();
         out.setId(dbc.insertCocktail(out));
 // toevoegen aan lokale DB
-        controller.addCocktail(out);
+//        controller.addCocktail(out);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
