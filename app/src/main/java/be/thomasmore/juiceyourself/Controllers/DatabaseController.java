@@ -199,6 +199,7 @@ public class DatabaseController extends SQLiteOpenHelper {
         cursor.close();
         return counter;
     }
+
     public List<Cocktail> getCocktails() {
         List<Cocktail> outlist = new ArrayList<Cocktail>();
         String QUERY_COCKTAIL_SELECT_ALL = "SELECT * FROM cocktail";
@@ -230,6 +231,71 @@ public class DatabaseController extends SQLiteOpenHelper {
         cursor.close();
         return outlist;
     }
+    public Cocktail getCocktailByName(String name) {
+        Cocktail out = new Cocktail();
+        out.setId(-1);
+        String QUERY_COCKTAIL_SELECT_NAME = "SELECT * FROM cocktail WHERE naam='"+name+"'";
+        SQLiteDatabase db = dbr;
+        Cursor cursor = db.rawQuery(QUERY_COCKTAIL_SELECT_NAME, null);
+        if(cursor.moveToFirst()) {
+            do{
+                Categorie cat = new Categorie();
+                Glas glas = new Glas();
+                Cocktail c = new Cocktail();
+                c.setId(cursor.getLong(0));
+                c.setNaam(cursor.getString(1));
+                cat.setNaam(cursor.getString(2));
+                c.setCategorie(cat);
+                glas.setNaam(cursor.getString(3));
+                c.setGlas(glas);
+                c.setInstructies(cursor.getString(4));
+                c.setThumbnail(cursor.getString(5));
+                c.setAlcoholisch(cursor.getInt(5)>0);
+                for(int i=0;i<15;i++) {
+                    CocktailIngredient ing = new CocktailIngredient();
+                    ing.setNaam(cursor.getString(6+i));
+                    ing.setHoeveelheid(cursor.getString(21+i));
+                    c.addIngredient(ing);
+                }
+                out = c;
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        return out;
+    }
+
+    public Cocktail getCocktailById(long id) {
+        Cocktail out = new Cocktail();
+        String QUERY_COCKTAIL_SELECT_ID = "SELECT * FROM cocktail WHERE id="+id;
+        SQLiteDatabase db = dbr;
+        Cursor cursor = db.rawQuery(QUERY_COCKTAIL_SELECT_ID, null);
+        if(cursor.moveToFirst()) {
+            do{
+                Categorie cat = new Categorie();
+                Glas glas = new Glas();
+                Cocktail c = new Cocktail();
+                c.setId(cursor.getLong(0));
+                c.setNaam(cursor.getString(1));
+                cat.setNaam(cursor.getString(2));
+                c.setCategorie(cat);
+                glas.setNaam(cursor.getString(3));
+                c.setGlas(glas);
+                c.setInstructies(cursor.getString(4));
+                c.setThumbnail(cursor.getString(5));
+                c.setAlcoholisch(cursor.getInt(5)>0);
+                for(int i=0;i<15;i++) {
+                    CocktailIngredient ing = new CocktailIngredient();
+                    ing.setNaam(cursor.getString(6+i));
+                    ing.setHoeveelheid(cursor.getString(21+i));
+                    c.addIngredient(ing);
+                }
+                out = c;
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
+        return out;
+    }
+
     public List<Cocktail> searchCocktail(String regexNaam, String glasstr, String categoriestr, String ingredientstr) {
         List<Cocktail> outlist = new ArrayList<Cocktail>();
         String QUERY_COCKTAIL_SEARCH = "SELECT * FROM cocktail WHERE naam LIKE '*" + regexNaam + "*'";

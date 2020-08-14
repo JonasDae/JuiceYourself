@@ -98,6 +98,7 @@ public class JsonHelper {
         }
         return lijst;
     }
+
 // https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list
     public String[] getIngredientNamen(String jsontxt) {
         List<String> lijst = new ArrayList<String>();
@@ -139,6 +140,77 @@ public class JsonHelper {
             Log.e("JSON Parser","Error parsing data: " + e.toString());
         }
         return lijst;
+    }
+
+//https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=ID
+    public Cocktail getCocktail(String jsontxt) {
+        Cocktail out = new Cocktail();
+        try {
+            JSONObject jsondrinks = new JSONObject(jsontxt);
+            JSONArray jsonarr = jsondrinks.getJSONArray("drinks");
+            for(int i=0;i<jsonarr.length();i++) {
+                JSONObject jsonobj = jsonarr.getJSONObject(i);
+                Cocktail cocktail = new Cocktail();
+// id
+                cocktail.setId(Integer.parseInt(jsonobj.getString("idDrink")));
+// naam
+                cocktail.setNaam(jsonobj.getString("strDrink"));
+// categorie
+                Categorie categorie = new Categorie();
+                categorie.setId(-1);
+                categorie.setNaam(jsonobj.getString("strCategory"));
+                cocktail.setCategorie(categorie);
+// thumb
+                cocktail.setThumbnail(jsonobj.getString("strDrinkThumb"));
+// glas
+                Glas glas = new Glas();
+                glas.setId(-1);
+                glas.setNaam(jsonobj.getString("strGlass"));
+                cocktail.setGlas(glas);
+                cocktail.setInstructies(jsonobj.getString("strInstructions"));
+// ingredienten
+                ArrayList<CocktailIngredient> ingredienten = new ArrayList<CocktailIngredient>();
+                for(int j=1; j <= 15; j++)  {
+                    CocktailIngredient ingredient = new CocktailIngredient();
+                    ingredient.setId(-1);
+                    ingredient.setNaam(jsonobj.getString("strIngredient"+j));
+                    ingredient.setHoeveelheid(jsonobj.getString("strMeasure"+j));
+                    if(!ingredient.getNaam().equals("null"))
+                        ingredienten.add(ingredient);
+                }
+                cocktail.setIngredienten(ingredienten);
+// alcoholisch
+                String alcoholisch = jsonobj.getString("strAlcoholic");
+                if(alcoholisch.matches("Alcoholic"))
+                    cocktail.setAlcoholisch(true);
+                else
+                    cocktail.setAlcoholisch(false);
+                out = cocktail;
+            }
+        }
+        catch(JSONException e) {
+            Log.e("JSON Parser","Error parsing data: " + e.toString());
+        }
+        return out;
+    }
+
+    public String[] getCocktailValues(String jsontxt) {
+        List<String> list= new ArrayList<String>();
+        try {
+            JSONObject jsondrinks = new JSONObject(jsontxt);
+            JSONArray jsonarr = jsondrinks.getJSONArray("drinks");
+            for(int i=0;i<jsonarr.length();i++) {
+                JSONObject jsonobj = jsonarr.getJSONObject(i);
+                Cocktail cocktail = new Cocktail();
+                list.add(jsonobj.getString("strDrink"));
+            }
+        }
+        catch(JSONException e) {
+            Log.e("JSON Parser","Error parsing data: " + e.toString());
+        }
+        String[] out = new String[list.size()];
+        list.toArray(out);
+        return out;
     }
     public List<Cocktail> getCocktails(String jsontxt) {
         List<Cocktail> lijst = new ArrayList<Cocktail>();

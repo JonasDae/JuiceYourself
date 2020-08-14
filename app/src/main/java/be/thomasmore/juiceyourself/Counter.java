@@ -19,6 +19,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import be.thomasmore.juiceyourself.Controllers.DatabaseController;
+import be.thomasmore.juiceyourself.Controllers.HttpReader;
+import be.thomasmore.juiceyourself.Controllers.JsonHelper;
 import be.thomasmore.juiceyourself.Controllers.ModelController;
 import be.thomasmore.juiceyourself.Models.Cocktail;
 import be.thomasmore.juiceyourself.Models.CocktailCounter;
@@ -26,30 +28,87 @@ import be.thomasmore.juiceyourself.adapters.SpinnerAdapter;
 
 public class Counter extends AppCompatActivity {
 // members
-    ModelController controller;
+//    ModelController controller;
     DatabaseController dbc;
     CocktailCounter counter;
-    Cocktail cocktail;
     Spinner spinnerCocktail;
-// methods
+    String[] cocktailList;
+    // methods
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_counter);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-// standaard controller ophalen
-        controller = ModelController.getInstance(null, null, null, null);
 // lokale database nodig voor weg te schrijven
         dbc = DatabaseController.getInstance(this);
 // dees zijn die spinners, zie adapter
         spinnerCocktail = (Spinner) findViewById(R.id.spinnerCocktail);
-        SpinnerAdapter adapterCocktail = new SpinnerAdapter(getApplicationContext(), controller.getCocktailValues());
-        spinnerCocktail.setAdapter(adapterCocktail);
+        fillCocktailSpinner();
     }
-// counter incrementeren in lokale db
+    public void fillCocktailSpinner()  {
+        cocktailList = new String[0];
+        for(char i='a';i<='z';i++)
+        {
+            HttpReader reader = new HttpReader();
+            reader.setOnResultReadyListener(new HttpReader.OnResultReadyListener() {
+                                                        @Override
+                                                        public void resultReady(String result) {
+                            JsonHelper helper = new JsonHelper();
+                            String[] cocktails = helper.getCocktailValues(result);
+// 2 letters zonder cocktails
+                            if(cocktails.length > 0)
+                            {
+                                String[] tmp = new String[cocktails.length + cocktailList.length];
+                                int index = 0;
+                                for(String elem: cocktails)
+                                {
+                                    tmp[index] = elem;
+                                    index++;
+                                }
+                                for(String elem: cocktailList)
+                                {
+                                    tmp[index] = elem;
+                                    index++;
+                                }
+                                cocktailList = new String[tmp.length];
+                                cocktailList = tmp.clone();
+
+                                if(cocktails[0].toLowerCase().charAt(0) == 'z')
+                                {
+                                    Log.d("DBG",cocktails[0]);
+
+                                    SpinnerAdapter adapterCocktail = new SpinnerAdapter(getApplicationContext(), cocktailList);
+                                    spinnerCocktail.setAdapter(adapterCocktail);
+                                }
+                            }
+                }
+            });
+            reader.execute("https://www.thecocktaildb.com/api/json/v1/1/search.php?f="+i);
+        }
+    }
+    // counter incrementeren in lokale db
     public void JUICE_UP_BRO(View v) {
-        cocktail = controller.getCocktailByName((String)spinnerCocktail.getSelectedItem());
+        Cocktail cocktail = dbc.getCocktailByName((String)spinnerCocktail.getSelectedItem());
+        if(cocktail.getId() >= 0)
+            updateCounter(cocktail);
+        else
+        {
+
+            HttpReader reader = new HttpReader();
+            reader.setOnResultReadyListener(new HttpReader.OnResultReadyListener() {
+                                                @Override
+                                                public void resultReady(String result) {
+                    JsonHelper helper = new JsonHelper();
+                    Cocktail c = helper.getCocktail(result);
+                    updateCounter(c);
+                }
+            });
+            reader.execute("https://www.thecocktaildb.com/api/json/v1/1/search.php?s="+(String)spinnerCocktail.getSelectedItem());
+        }
+   }
+    public void updateCounter(Cocktail cocktail)
+    {
         counter = dbc.getCounterByCocktail(cocktail.getId());
         counter.setCounter(counter.getCounter()+1);
         if(!dbc.updateCounter(counter))
